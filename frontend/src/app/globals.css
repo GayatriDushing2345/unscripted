@@ -1,14 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Warm Ivory & Emerald Green Luxury Editorial Palette */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+
+  /* Warm Ivory & Bold Emerald Luxury Palette */
   --bg-primary: #FAF7F2;
   --bg-secondary: #F5EFEB;
   --bg-card: #FFFFFF;
   --bg-ivory-warm: #FFFDF9;
   --bg-ivory-sand: #F0EAE1;
   
-  /* Emerald Green Suite */
+  /* Bold Emerald Suite */
   --emerald-noir: #022C22;
   --emerald-deep: #064E3B;
   --emerald-forest: #047857;
@@ -17,13 +20,13 @@
   --emerald-soft: #ECFDF5;
   --emerald-tint: #D1FAE5;
   
-  /* Champagne & Brass Gold Accents */
+  /* Champagne & Gold Accents */
   --gold-primary: #D4AF37;
   --gold-brass: #B38A38;
   --gold-champagne: #F7EEDB;
   --gold-subtle: #FDF9F0;
 
-  /* Typography & High-Contrast Dramatic Slates */
+  /* Typography & High-Contrast Slates */
   --text-primary: #062419;
   --text-secondary: #244637;
   --text-muted: #537566;
@@ -33,43 +36,37 @@
   --border-ivory: #E5DDD1;
   --border-subtle: #EDE5D8;
   --border-emerald: rgba(6, 78, 59, 0.2);
-  --border-gold: rgba(212, 175, 55, 0.35);
+  --border-gold: rgba(212, 175, 55, 0.4);
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, .font-serif {
-  font-family: var(--font-serif), Georgia, serif;
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
 }
 
 /* Dramatic Typography Styles */
 .dramatic-hero-title {
-  font-family: var(--font-serif), Georgia, serif;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  font-family: var(--font-display), system-ui, sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  font-weight: 800;
 }
 
 .dramatic-subtitle {
   letter-spacing: -0.01em;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
-.dramatic-badge {
-  font-family: var(--font-sans), sans-serif;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 800;
-}
-
-/* Bento Grid System */
+/* Bento Grid System - Full Screen Responsive */
 .bento-card {
   background: #FFFFFF;
   border: 1px solid #E5DDD1;
@@ -82,16 +79,16 @@ h1, h2, h3, h4, .font-serif {
 
 .bento-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(6, 78, 59, 0.3);
-  box-shadow: 0 16px 36px -4px rgba(6, 78, 59, 0.09), 0 4px 12px -2px rgba(6, 78, 59, 0.04);
+  border-color: rgba(6, 78, 59, 0.35);
+  box-shadow: 0 16px 36px -4px rgba(6, 78, 59, 0.1), 0 4px 12px -2px rgba(6, 78, 59, 0.04);
 }
 
 .bento-card-emerald {
-  background: linear-gradient(145deg, #064E3B 0%, #033629 100%);
+  background: linear-gradient(145deg, #064E3B 0%, #022C22 100%);
   color: #FAF7F2;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: 1.75rem;
-  box-shadow: 0 12px 36px -4px rgba(2, 44, 34, 0.35);
+  box-shadow: 0 16px 40px -4px rgba(2, 44, 34, 0.4);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
@@ -99,8 +96,8 @@ h1, h2, h3, h4, .font-serif {
 
 .bento-card-emerald:hover {
   transform: translateY(-3px);
-  box-shadow: 0 20px 48px -4px rgba(2, 44, 34, 0.45);
-  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 24px 50px -4px rgba(2, 44, 34, 0.5);
+  border-color: rgba(212, 175, 55, 0.6);
 }
 
 .bento-card-ivory {
@@ -115,22 +112,23 @@ h1, h2, h3, h4, .font-serif {
 
 .bento-card-ivory:hover {
   border-color: #064E3B;
-  box-shadow: 0 12px 28px -4px rgba(6, 78, 59, 0.07);
+  box-shadow: 0 12px 28px -4px rgba(6, 78, 59, 0.08);
 }
 
-/* Emerald Luxury Buttons */
+/* Bold Emerald & Gold Buttons */
 .emerald-btn-primary {
   background: linear-gradient(135deg, #064E3B 0%, #047857 100%);
   color: #FAF7F2;
   border: 1px solid #065F46;
-  box-shadow: 0 4px 14px rgba(6, 78, 59, 0.28);
+  box-shadow: 0 4px 16px rgba(6, 78, 59, 0.28);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 800;
 }
 
 .emerald-btn-primary:hover {
   background: linear-gradient(135deg, #075E47 0%, #059669 100%);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(6, 78, 59, 0.38);
+  box-shadow: 0 8px 26px rgba(6, 78, 59, 0.4);
 }
 
 .emerald-btn-primary:active {
@@ -152,48 +150,6 @@ h1, h2, h3, h4, .font-serif {
   box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45);
 }
 
-/* Game Stage Buttons - Refitted for Emerald & Ivory Winding Path */
-.game-btn-primary {
-  background: linear-gradient(135deg, #064E3B 0%, #047857 50%, #059669 100%);
-  color: #FAF7F2;
-  box-shadow: 0 6px 0 #022C22, 0 12px 24px -4px rgba(6, 78, 59, 0.4);
-  transition: all 0.15s ease-in-out;
-}
-
-.game-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 0 #022C22, 0 16px 28px -4px rgba(6, 78, 59, 0.5);
-}
-
-.game-btn-primary:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #022C22, 0 6px 12px -2px rgba(6, 78, 59, 0.3);
-}
-
-.game-btn-coral {
-  background: linear-gradient(135deg, #D4AF37 0%, #B38A38 100%);
-  color: #022C22;
-  box-shadow: 0 6px 0 #805E1F, 0 12px 24px -4px rgba(212, 175, 55, 0.35);
-  transition: all 0.15s ease-in-out;
-}
-
-.game-btn-coral:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 0 #805E1F, 0 16px 28px -4px rgba(212, 175, 55, 0.45);
-}
-
-.game-btn-coral:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #805E1F, 0 6px 12px -2px rgba(212, 175, 55, 0.25);
-}
-
-.game-card-3d {
-  background: #FFFFFF;
-  border: 1px solid #E5DDD1;
-  box-shadow: 0 8px 0 #F0EAE1, 0 16px 32px -4px rgba(6, 78, 59, 0.08);
-  border-radius: 2rem;
-}
-
 /* Animations */
 @keyframes floatGentle {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -202,17 +158,17 @@ h1, h2, h3, h4, .font-serif {
 
 @keyframes pulseEmeraldGlow {
   0%, 100% { box-shadow: 0 0 15px rgba(6, 78, 59, 0.3), 0 0 30px rgba(16, 185, 129, 0.15); }
-  50% { box-shadow: 0 0 28px rgba(6, 78, 59, 0.5), 0 0 45px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(6, 78, 59, 0.55), 0 0 50px rgba(16, 185, 129, 0.3); }
 }
 
 @keyframes bounceSlow {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes popIn {
-  0% { transform: scale(0.92); opacity: 0; }
-  70% { transform: scale(1.02); opacity: 1; }
+  0% { transform: scale(0.95); opacity: 0; }
+  70% { transform: scale(1.01); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
 
@@ -229,36 +185,5 @@ h1, h2, h3, h4, .font-serif {
 }
 
 .animate-pop {
-  animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Warm Ivory & Emerald Chapter Atmospheres */
-.chapter-bg-1 {
-  background: radial-gradient(circle at 12% 18%, rgba(6, 78, 59, 0.08) 0%, transparent 45%),
-              radial-gradient(circle at 88% 82%, rgba(212, 175, 55, 0.09) 0%, transparent 50%),
-              #FAF7F2;
-}
-
-.chapter-bg-2 {
-  background: radial-gradient(circle at 15% 30%, rgba(4, 120, 87, 0.09) 0%, transparent 45%),
-              radial-gradient(circle at 85% 70%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
-              #FAF7F2;
-}
-
-.chapter-bg-3 {
-  background: radial-gradient(circle at 20% 20%, rgba(6, 78, 59, 0.1) 0%, transparent 45%),
-              radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-              #FAF7F2;
-}
-
-.chapter-bg-4 {
-  background: radial-gradient(circle at 10% 30%, rgba(2, 44, 34, 0.1) 0%, transparent 45%),
-              radial-gradient(circle at 90% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-              #FAF7F2;
-}
-
-.chapter-bg-5 {
-  background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.12) 0%, transparent 55%),
-              radial-gradient(circle at 50% 80%, rgba(6, 78, 59, 0.1) 0%, transparent 55%),
-              #FAF7F2;
+  animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

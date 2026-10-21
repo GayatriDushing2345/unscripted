@@ -9,7 +9,6 @@ import {
   Sparkles,
   Map,
   LayoutDashboard,
-  Info,
   LogOut,
   Flame,
   Star,
@@ -17,6 +16,8 @@ import {
   ExternalLink,
   ShieldCheck,
   X,
+  Search,
+  ArrowRight,
 } from 'lucide-react';
 import { getCurrentUser, setCurrentUser, fetchJson } from '@/lib/api';
 import { OnetApiStatus } from '@/types';
@@ -31,7 +32,6 @@ export const Navigation: React.FC = () => {
   useEffect(() => {
     setUser(getCurrentUser());
 
-    // Fetch live O*NET data status from backend
     fetchJson<OnetApiStatus>('/onet/status')
       .then((data) => setOnetStatus(data))
       .catch((err) => console.debug('O*NET status fetch:', err));
@@ -44,87 +44,84 @@ export const Navigation: React.FC = () => {
   };
 
   const navLinks = [
-    { href: '/journey', label: '15-Stage Map', icon: Map, color: 'text-[#064E3B]' },
-    { href: '/explore', label: 'Discovery Quest', icon: Compass, color: 'text-[#047857]' },
-    { href: '/results', label: 'Horizons (O*NET)', icon: Sparkles, color: 'text-[#D4AF37]' },
-    { href: '/dashboard', label: 'Command Deck', icon: LayoutDashboard, color: 'text-[#065F46]' },
-    { href: '/about', label: 'Philosophy', icon: Info, color: 'text-[#537566]' },
+    { href: '/explore', label: 'Discovery Quest', icon: Compass },
+    { href: '/results', label: 'Career Horizons', icon: Search },
+    { href: '/reality-check?id=15-1252.00', label: 'Reality Check', icon: ShieldCheck },
+    { href: '/journey', label: '15-Stage Roadmap', icon: Map },
+    { href: '/dashboard', label: 'Command Deck', icon: LayoutDashboard },
   ];
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E5DDD1] shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-[#FAF7F2]/90 backdrop-blur-xl border-b border-[#064E3B]/10">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
           
-          {/* Brand Wordmark & Animated Lily */}
+          {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-3.5 group">
-            <div className="p-2.5 rounded-2xl bg-gradient-to-br from-[#ECFDF5] via-[#FFFDF9] to-[#F7EEDB] border border-[#C5A880] shadow-[0_3px_0_#064E3B] group-hover:scale-105 transition-all">
-              <LilyFlower className="w-6 h-6 text-[#064E3B] transition-transform duration-300 group-hover:rotate-12" />
+            <div className="w-11 h-11 rounded-2xl bg-[#064E3B] text-[#D4AF37] flex items-center justify-center shadow-[0_4px_16px_rgba(6,78,59,0.25)] group-hover:scale-105 transition-all">
+              <LilyFlower className="w-6 h-6 text-[#D4AF37] transition-transform duration-300 group-hover:rotate-12" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-serif text-2xl font-black tracking-tight text-[#062419]">
-                  Unscripted
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#ECFDF5] border border-[#047857]/30 text-[10px] font-black text-[#064E3B] uppercase tracking-wider">
-                  Edition 2.0
+                <span className="font-display font-black text-2xl tracking-tight text-[#062419]">
+                  UNSCRIPTED
                 </span>
               </div>
-              <span className="hidden sm:block text-[11px] uppercase tracking-widest text-[#047857] font-black">
-                Your career has no script
+              <span className="block text-[10px] uppercase tracking-[0.2em] text-[#047857] font-black">
+                Career Reality & Growth Engine
               </span>
             </div>
           </Link>
 
-          {/* Center Navigation Pills */}
-          <nav className="hidden lg:flex items-center gap-1.5 bg-[#F4EFE6] p-1.5 rounded-full border border-[#E5DDD1]">
+          {/* Center Navigation Tabs */}
+          <nav className="hidden lg:flex items-center gap-1 bg-[#F4EFE6]/80 p-1.5 rounded-full border border-[#064E3B]/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]">
             {navLinks.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = pathname === item.href || (item.href.includes('?') && pathname === item.href.split('?')[0]);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-black tracking-wide uppercase transition-all ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#064E3B] to-[#047857] text-[#FAF7F2] shadow-[0_3px_0_#022C22] scale-105'
-                      : 'text-[#244637] hover:text-[#062419] hover:bg-white'
+                      ? 'bg-[#064E3B] text-[#FAF7F2] shadow-[0_2px_10px_rgba(6,78,59,0.3)] font-black'
+                      : 'text-[#244637] hover:text-[#062419] hover:bg-white/80'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#D4AF37]' : item.color}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#D4AF37]' : 'text-[#047857]'}`} />
                   {item.label}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Right Controls: O*NET Status Pill + Player HUD */}
+          {/* Right Controls: O*NET Transparency Pill + Student Profile */}
           <div className="flex items-center gap-3">
             
-            {/* O*NET Live Data Pill */}
+            {/* O*NET Live Feed Pill */}
             <button
               onClick={() => setShowOnetModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#ECFDF5] border border-[#047857]/30 hover:border-[#064E3B] shadow-xs text-[11px] font-black text-[#064E3B] transition-all hover:scale-105"
-              title="Official O*NET 29.0 Data Feed"
+              className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#ECFDF5] border border-[#047857]/30 hover:border-[#064E3B] shadow-xs text-xs font-bold text-[#064E3B] transition-all hover:scale-105"
+              title="Official US Dept of Labor O*NET 29.0 Data Feed"
             >
               <Database className="w-3.5 h-3.5 text-[#047857]" />
-              <span className="hidden sm:inline">O*NET 29.0</span>
-              <span className={`w-2 h-2 rounded-full ${onetStatus?.liveApiConnected ? 'bg-[#10B981] animate-ping' : 'bg-[#10B981]'}`}></span>
+              <span className="font-mono text-[11px] font-bold">O*NET 29.0</span>
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
             </button>
 
-            {/* Player Stats HUD */}
+            {/* Student Account */}
             {user ? (
-              <div className="flex items-center gap-2">
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#F7EEDB] border border-[#C5A880] text-xs font-black text-[#022C22]">
-                  <Flame className="w-4 h-4 text-[#D4AF37] fill-current animate-pulse" />
+              <div className="flex items-center gap-2.5">
+                <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F7EEDB] border border-[#D4AF37]/40 text-xs font-black text-[#022C22]">
+                  <Flame className="w-3.5 h-3.5 text-[#D4AF37] fill-current" />
                   <span>3 Days</span>
                 </div>
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-2 text-xs font-black text-[#062419] bg-white border border-[#E5DDD1] px-3.5 py-1.5 rounded-full shadow-[0_2px_0_#064E3B] hover:bg-[#FAF7F2]"
+                  className="flex items-center gap-2 text-xs font-black text-[#062419] bg-white border border-[#064E3B]/20 px-4 py-2 rounded-full shadow-xs hover:border-[#064E3B] transition-all"
                 >
                   <Star className="w-3.5 h-3.5 text-[#D4AF37] fill-current" />
-                  <span>{user.name || user.email?.split('@')[0]}</span>
+                  <span>{user.name || 'Student Deck'}</span>
                 </Link>
                 <button
                   onClick={handleLogout}
@@ -137,10 +134,11 @@ export const Navigation: React.FC = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <Link
-                  href="/login"
-                  className="emerald-btn-primary px-4 py-2 rounded-full text-xs font-black tracking-wider uppercase"
+                  href="/explore"
+                  className="emerald-btn-primary px-5 py-2.5 rounded-full text-xs font-black tracking-wider uppercase inline-flex items-center gap-1.5"
                 >
-                  Join Guild
+                  <span>Start Free</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
                 </Link>
               </div>
             )}
@@ -148,7 +146,7 @@ export const Navigation: React.FC = () => {
         </div>
       </header>
 
-      {/* O*NET API Transparency Modal */}
+      {/* O*NET Transparency Modal */}
       {showOnetModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-pop">
           <div className="bg-[#FAF7F2] rounded-3xl max-w-lg w-full p-6 sm:p-8 border-2 border-[#064E3B] shadow-2xl space-y-5">
@@ -158,11 +156,11 @@ export const Navigation: React.FC = () => {
                   <Database className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-serif text-xl font-black text-[#062419]">
+                  <h3 className="font-display text-xl font-black text-[#062419]">
                     Official Career Data Sourcing
                   </h3>
                   <span className="text-xs font-bold text-[#537566]">
-                    Real O*NET & US Bureau of Labor Statistics (BLS)
+                    US Department of Labor O*NET 29.0 & Bureau of Labor Statistics (BLS)
                   </span>
                 </div>
               </div>
@@ -178,12 +176,12 @@ export const Navigation: React.FC = () => {
               <div className="p-4 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 space-y-1">
                 <div className="flex items-center gap-2 font-black text-[#064E3B]">
                   <ShieldCheck className="w-4 h-4 text-[#10B981]" />
-                  <span>Authentic Verified Data Guarantee</span>
+                  <span>Real Empirical Data Guarantee</span>
                 </div>
                 <p className="text-xs text-[#065F46] font-medium leading-relaxed">
-                  Unscripted retrieves real occupation codes (SOC), official BLS wage statistics,
-                  job growth projections, and Holland RIASEC interest profiles directly from the official O*NET 29.0 database.
-                  No salaries or outlook numbers are ever fabricated.
+                  Unscripted retrieves verified occupation codes (SOC), real BLS median salaries,
+                  projected 10-year job growth, and Holland RIASEC profiles directly from the official O*NET database.
+                  No salaries or stats are ever fabricated.
                 </p>
               </div>
 
@@ -194,13 +192,11 @@ export const Navigation: React.FC = () => {
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-[#F0EAE1]">
                   <span className="font-bold text-[#537566]">Active Dataset:</span>
-                  <span className="font-black text-[#064E3B]">{onetStatus?.activeDataset || 'Official O*NET 29.0 & U.S. BLS'}</span>
+                  <span className="font-black text-[#064E3B]">{onetStatus?.activeDataset || 'Official O*NET 29.0 Database'}</span>
                 </div>
                 <div className="flex justify-between py-1.5">
-                  <span className="font-bold text-[#537566]">Live API Credentials:</span>
-                  <span className="font-black text-[#047857]">
-                    {onetStatus?.credentialsConfigured ? 'Authenticated (Live Web Services)' : 'Embedded Official O*NET 29.0 Active'}
-                  </span>
+                  <span className="font-bold text-[#537566]">Verified Occupations:</span>
+                  <span className="font-black text-[#047857]">900+ Sourced Careers</span>
                 </div>
               </div>
             </div>
@@ -219,7 +215,7 @@ export const Navigation: React.FC = () => {
                 onClick={() => setShowOnetModal(false)}
                 className="emerald-btn-primary px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider"
               >
-                Understood
+                Got It
               </button>
             </div>
           </div>

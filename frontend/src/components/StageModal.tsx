@@ -78,7 +78,7 @@ export const StageModal: React.FC<StageModalProps> = ({
               <span className="text-[11px] font-black uppercase tracking-widest text-[#D4AF37] block">
                 {stage.chapterTitle}
               </span>
-              <h3 className="font-serif font-black text-xl leading-tight text-white">
+              <h3 className="font-display font-black text-xl leading-tight text-white">
                 {stage.title}
               </h3>
             </div>
@@ -106,7 +106,7 @@ export const StageModal: React.FC<StageModalProps> = ({
                   ? 'Rowan • Horizon Explorer'
                   : 'Theron • Strategy Mentor'}
               </span>
-              <p className="font-serif italic text-sm sm:text-base text-[#062419] leading-relaxed">
+              <p className="font-display italic text-sm sm:text-base text-[#062419] leading-relaxed">
                 "{stage.dialogueQuote}"
               </p>
             </div>

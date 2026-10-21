@@ -355,11 +355,11 @@ export default function ExploreQuestPage() {
   const currentScenario = QUEST_SCENARIOS.find((s) => s.id === currentTrial);
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-[#FAF7F2] text-[#062419] pb-24">
-      <div className="max-w-4xl mx-auto space-y-8 animate-pop">
+    <div className="min-h-screen w-full py-10 px-4 sm:px-8 lg:px-14 bg-[#FAF7F2] text-[#062419] pb-28">
+      <div className="w-full max-w-[1500px] mx-auto space-y-8 animate-pop">
 
         {/* Quest HUD & Top Header */}
-        <div className="bento-card p-6 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bento-card p-7 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#064E3B] to-[#022C22] text-[#D4AF37] shadow-sm border border-[#D4AF37]/30">
               <Compass className="w-8 h-8" />
@@ -373,7 +373,7 @@ export default function ExploreQuestPage() {
                   <Flame className="w-3.5 h-3.5 fill-current" /> +50 XP / Trial
                 </span>
               </div>
-              <h1 className="font-serif text-2xl sm:text-3xl font-black text-[#062419]">
+              <h1 className="font-display text-2xl sm:text-3xl font-black text-[#062419]">
                 The Trial of Horizons
               </h1>
             </div>
@@ -418,7 +418,7 @@ export default function ExploreQuestPage() {
                     <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] fill-current" />
                     <span>{currentScenario.chapterBadge}</span>
                   </div>
-                  <h2 className="font-serif text-2xl font-black text-[#062419]">
+                  <h2 className="font-display text-2xl font-black text-[#062419]">
                     {currentScenario.missionName}
                   </h2>
                   <p className="text-base text-[#244637] font-medium leading-relaxed">
@@ -431,7 +431,7 @@ export default function ExploreQuestPage() {
               {activeFeedback && (
                 <div className="mt-5 p-4 rounded-2xl bg-gradient-to-r from-[#ECFDF5] to-[#F7EEDB] border border-[#064E3B] flex items-center gap-3 animate-pop">
                   <Sparkles className="w-5 h-5 text-[#064E3B] flex-shrink-0" />
-                  <p className="italic font-serif text-sm text-[#062419] font-bold">
+                  <p className="italic font-display text-sm text-[#062419] font-bold">
                     {activeFeedback}
                   </p>
                 </div>
@@ -468,7 +468,7 @@ export default function ExploreQuestPage() {
                             </span>
                           )}
                         </div>
-                        <h3 className="font-serif text-lg font-black text-[#062419] group-hover:text-[#064E3B] transition-colors">
+                        <h3 className="font-display text-lg font-black text-[#062419] group-hover:text-[#064E3B] transition-colors">
                           {opt.label}
                         </h3>
                         <p className="text-xs text-[#537566] font-medium leading-relaxed">
@@ -529,7 +529,7 @@ export default function ExploreQuestPage() {
                   <span className="text-xs font-black uppercase tracking-wider text-[#064E3B] bg-[#ECFDF5] px-3 py-1 rounded-full border border-[#047857]/20">
                     Final Calibration • The Superpower Forge
                   </span>
-                  <h2 className="font-serif text-2xl font-black text-[#062419] mt-1">
+                  <h2 className="font-display text-2xl font-black text-[#062419] mt-1">
                     Lock In Your Active Skills & Aspirations
                   </h2>
                 </div>
@@ -544,7 +544,7 @@ export default function ExploreQuestPage() {
             <div className="bento-card p-6 bg-white space-y-4">
               <div className="flex items-center gap-2">
                 <Zap className="w-5 h-5 text-[#D4AF37]" />
-                <h3 className="font-serif text-lg font-black text-[#062419]">
+                <h3 className="font-display text-lg font-black text-[#062419]">
                   1. Current Innate Strengths (Tap to toggle)
                 </h3>
               </div>
@@ -573,7 +573,7 @@ export default function ExploreQuestPage() {
             <div className="bento-card p-6 bg-white space-y-4">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[#D4AF37]" />
-                <h3 className="font-serif text-lg font-black text-[#062419]">
+                <h3 className="font-display text-lg font-black text-[#062419]">
                   2. Skills You Want to Forge on the Map
                 </h3>
               </div>

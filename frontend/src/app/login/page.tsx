@@ -80,7 +80,7 @@ export default function LoginPage() {
           <div className="inline-flex p-3 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 shadow-xs">
             <LilyFlower className="w-8 h-8 text-[#064E3B]" />
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl font-black tracking-tight text-[#062419]">
+          <h2 className="font-display text-3xl sm:text-4xl font-black tracking-tight text-[#062419]">
             {isRegister ? 'Begin Your Story' : 'Welcome Back'}
           </h2>
           <p className="text-sm text-[#537566] font-medium">
