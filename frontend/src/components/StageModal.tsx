@@ -7,7 +7,6 @@ import confetti from 'canvas-confetti';
 import {
   X,
   Sparkles,
-  Award,
   CheckCircle2,
   Lock,
   ArrowRight,
@@ -47,12 +46,12 @@ export const StageModal: React.FC<StageModalProps> = ({
     setHasSubmitted(true);
 
     try {
-      // Big confetti fountain burst
+      // Emerald & Gold victory confetti burst
       confetti({
         particleCount: 90,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#7C3AED', '#F43F5E', '#10B981', '#FBBF24', '#06B6D4'],
+        colors: ['#064E3B', '#10B981', '#D4AF37', '#059669', '#FAF7F2'],
       });
 
       await onCompleteStage(stage.id, selectedChoice?.id);
@@ -64,22 +63,22 @@ export const StageModal: React.FC<StageModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1E152A]/60 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#022C22]/60 backdrop-blur-md animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-xl bg-white rounded-3xl border-4 border-[#E9D5FF] shadow-[0_20px_50px_rgba(124,58,237,0.3)] overflow-hidden flex flex-col max-h-[92vh] animate-pop"
+        className="relative w-full max-w-xl bg-[#FAF7F2] rounded-3xl border-2 border-[#064E3B] shadow-[0_20px_50px_rgba(2,44,34,0.35)] overflow-hidden flex flex-col max-h-[92vh] animate-pop"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Header Banner */}
-        <div className="p-6 bg-gradient-to-r from-[#7C3AED] via-[#9333EA] to-[#F43F5E] text-white flex items-center justify-between shadow-md">
+        {/* Top Header Banner: Deep Emerald to Noir */}
+        <div className="p-6 bg-gradient-to-r from-[#064E3B] via-[#047857] to-[#022C22] text-[#FAF7F2] flex items-center justify-between shadow-md border-b border-[#D4AF37]/30">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-white text-[#7C3AED] flex items-center justify-center font-black text-xl shadow-md border-2 border-[#FEF08A]">
+            <div className="w-12 h-12 rounded-2xl bg-white text-[#064E3B] flex items-center justify-center font-black text-xl shadow-md border-2 border-[#D4AF37]">
               {stage.stageNumber}
             </div>
             <div>
-              <span className="text-[11px] font-black uppercase tracking-widest text-[#FEF08A] block">
+              <span className="text-[11px] font-black uppercase tracking-widest text-[#D4AF37] block">
                 {stage.chapterTitle}
               </span>
-              <h3 className="font-black text-xl leading-tight drop-shadow-xs">
+              <h3 className="font-serif font-black text-xl leading-tight text-white">
                 {stage.title}
               </h3>
             </div>
@@ -87,23 +86,27 @@ export const StageModal: React.FC<StageModalProps> = ({
 
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors"
+            className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-[#FAF7F2] flex items-center justify-center transition-colors"
           >
-            <X className="w-6 h-6 stroke-[3]" />
+            <X className="w-5 h-5 stroke-[2.5]" />
           </button>
         </div>
 
         {/* Scrollable Stage Content */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 bg-[#FAF7F2]">
           
-          {/* Big Character Dialogue Card */}
-          <div className="p-5 rounded-2xl bg-white border-2 border-[#E9D5FF] shadow-sm flex items-start gap-4">
+          {/* Character Dialogue Card */}
+          <div className="p-5 rounded-2xl bg-white border border-[#E5DDD1] shadow-xs flex items-start gap-4">
             <CharacterArt character={stage.guideCharacter} className="w-20 h-20 flex-shrink-0" />
             <div className="space-y-1">
-              <span className="text-xs font-black uppercase tracking-wider text-[#7C3AED] block">
-                {stage.guideCharacter === 'aurelia' ? 'Aurelia • Celestial Guide' : stage.guideCharacter === 'rowan' ? 'Rowan • Horizon Explorer' : 'Theron • Strategy Mentor'}
+              <span className="text-xs font-black uppercase tracking-wider text-[#064E3B] block">
+                {stage.guideCharacter === 'aurelia'
+                  ? 'Aurelia • Celestial Guide'
+                  : stage.guideCharacter === 'rowan'
+                  ? 'Rowan • Horizon Explorer'
+                  : 'Theron • Strategy Mentor'}
               </span>
-              <p className="font-serif italic text-sm sm:text-base text-[#1E152A] leading-relaxed">
+              <p className="font-serif italic text-sm sm:text-base text-[#062419] leading-relaxed">
                 "{stage.dialogueQuote}"
               </p>
             </div>
@@ -111,14 +114,14 @@ export const StageModal: React.FC<StageModalProps> = ({
 
           {/* Objectives Checklist */}
           {stage.objectives && stage.objectives.length > 0 && (
-            <div className="p-4 rounded-2xl bg-white border-2 border-[#E9D5FF] space-y-2">
-              <span className="text-xs font-black uppercase tracking-wider text-[#64567A] block">
-                Quest Objective
+            <div className="p-4 rounded-2xl bg-white border border-[#E5DDD1] space-y-2">
+              <span className="text-xs font-black uppercase tracking-wider text-[#537566] block">
+                Quest Objectives
               </span>
-              <ul className="space-y-2 text-xs sm:text-sm text-[#1E152A]">
+              <ul className="space-y-2 text-xs sm:text-sm text-[#062419]">
                 {stage.objectives.map((obj, idx) => (
                   <li key={idx} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-5 h-5 text-[#10B981] flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 text-[#10B981] flex-shrink-0" />
                     <span className="font-semibold">{obj}</span>
                   </li>
                 ))}
@@ -129,8 +132,8 @@ export const StageModal: React.FC<StageModalProps> = ({
           {/* Interactive Playable Choices */}
           {stage.choices && stage.choices.length > 0 ? (
             <div className="space-y-3">
-              <span className="text-xs font-black uppercase tracking-wider text-[#1E152A] block">
-                Choose Your Strategy:
+              <span className="text-xs font-black uppercase tracking-wider text-[#062419] block">
+                Choose Your Strategic Move:
               </span>
               <div className="space-y-3">
                 {stage.choices.map((choice) => {
@@ -141,25 +144,25 @@ export const StageModal: React.FC<StageModalProps> = ({
                       type="button"
                       disabled={isCompleted || hasSubmitted}
                       onClick={() => handleChoose(choice)}
-                      className={`w-full text-left p-4 rounded-2xl border-2 transition-all text-xs sm:text-sm ${
+                      className={`w-full text-left p-4 rounded-2xl border transition-all text-xs sm:text-sm ${
                         isPicked
-                          ? 'bg-[#F3E8FF] border-[#7C3AED] font-bold text-[#1E152A] shadow-md ring-2 ring-[#7C3AED]/40'
-                          : 'bg-white hover:bg-[#FAF5FF] border-[#E9D5FF] text-[#1E152A]'
+                          ? 'bg-[#ECFDF5] border-[#064E3B] font-bold text-[#062419] shadow-sm ring-2 ring-[#064E3B]/20'
+                          : 'bg-white hover:bg-[#F5EFEB] border-[#E5DDD1] text-[#062419]'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-3">
                         <span className="font-bold">{choice.text}</span>
                         {choice.skillFlag && (
-                          <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-[#EDE9FE] text-[#7C3AED] border border-[#DDD6FE] flex-shrink-0">
+                          <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#064E3B] border border-[#047857]/30 flex-shrink-0">
                             {choice.skillFlag}
                           </span>
                         )}
                       </div>
 
-                      {/* Coach Reaction */}
+                      {/* Mentor Reaction */}
                       {isPicked && (
-                        <div className="mt-3 pt-2.5 border-t border-[#DDD6FE] text-xs font-medium text-[#7C3AED] flex items-start gap-1.5">
-                          <Zap className="w-4 h-4 text-[#F59E0B] fill-current flex-shrink-0 mt-0.5" />
+                        <div className="mt-3 pt-2.5 border-t border-[#047857]/20 text-xs font-medium text-[#064E3B] flex items-start gap-1.5">
+                          <Zap className="w-4 h-4 text-[#D4AF37] fill-current flex-shrink-0 mt-0.5" />
                           <span>{choice.feedback}</span>
                         </div>
                       )}
@@ -169,15 +172,15 @@ export const StageModal: React.FC<StageModalProps> = ({
               </div>
             </div>
           ) : (
-            <div className="p-5 rounded-2xl bg-white border-2 border-[#E9D5FF] text-xs sm:text-sm text-[#64567A] leading-relaxed">
+            <div className="p-5 rounded-2xl bg-white border border-[#E5DDD1] text-xs sm:text-sm text-[#537566] leading-relaxed">
               {stage.learningOutcome || 'Reflect on this threshold and prepare to unlock the next region.'}
             </div>
           )}
 
           {/* Locked State Warning */}
           {isLocked && (
-            <div className="p-4 rounded-2xl bg-[#FFE4E6] border-2 border-[#FB7185] flex items-center gap-3 text-xs text-[#E11D48]">
-              <Lock className="w-6 h-6 flex-shrink-0 stroke-[2.5]" />
+            <div className="p-4 rounded-2xl bg-[#FFF1F2] border border-[#FDA4AF] flex items-center gap-3 text-xs text-[#BE123C]">
+              <Lock className="w-5 h-5 flex-shrink-0 stroke-[2.5]" />
               <div>
                 <span className="font-black text-sm block">Stage Locked!</span>
                 <span>Requirement: {stage.unlockRequirement}</span>
@@ -187,28 +190,28 @@ export const StageModal: React.FC<StageModalProps> = ({
 
           {/* Completed State Review */}
           {isCompleted && (
-            <div className="p-4 rounded-2xl bg-[#D1FAE5] border-2 border-[#10B981] flex items-center justify-between text-xs text-[#065F46]">
+            <div className="p-4 rounded-2xl bg-[#ECFDF5] border border-[#10B981] flex items-center justify-between text-xs text-[#064E3B]">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-6 h-6 text-[#10B981]" />
+                <CheckCircle2 className="w-5 h-5 text-[#10B981]" />
                 <span className="font-black text-sm">Stage Conquered!</span>
               </div>
-              <span className="font-black text-sm text-[#059669]">+{stage.xpReward} XP Collected</span>
+              <span className="font-black text-sm text-[#047857]">+{stage.xpReward} XP Collected</span>
             </div>
           )}
 
         </div>
 
-        {/* Big Action Footer */}
-        <div className="p-6 bg-white border-t-2 border-[#E9D5FF] flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-black text-[#7C3AED]">
-            <Sparkles className="w-5 h-5 text-[#F59E0B] fill-current" />
+        {/* Action Footer */}
+        <div className="p-6 bg-white border-t border-[#E5DDD1] flex items-center justify-between">
+          <div className="flex items-center gap-2 text-sm font-black text-[#064E3B]">
+            <Sparkles className="w-5 h-5 text-[#D4AF37] fill-current" />
             <span>Reward: +{stage.xpReward} XP</span>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className="px-5 py-3 rounded-full text-xs font-bold text-[#64567A] hover:text-[#1E152A]"
+              className="px-5 py-3 rounded-full text-xs font-bold text-[#537566] hover:text-[#062419]"
             >
               Back
             </button>
@@ -218,7 +221,7 @@ export const StageModal: React.FC<StageModalProps> = ({
                 type="button"
                 disabled={submitting || (stage.choices && stage.choices.length > 0 && !selectedChoice)}
                 onClick={handleSubmitAction}
-                className="game-btn-primary px-8 py-3.5 rounded-full text-xs font-black tracking-wide uppercase inline-flex items-center gap-2 disabled:opacity-50"
+                className="emerald-btn-primary px-8 py-3.5 rounded-full text-xs font-black tracking-wide uppercase inline-flex items-center gap-2 disabled:opacity-50"
               >
                 {submitting ? (
                   <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
@@ -234,7 +237,7 @@ export const StageModal: React.FC<StageModalProps> = ({
             {isCompleted && (
               <button
                 onClick={onClose}
-                className="game-btn-coral px-8 py-3.5 rounded-full text-xs font-black tracking-wide uppercase"
+                className="gold-btn-accent px-8 py-3.5 rounded-full text-xs font-black tracking-wide uppercase"
               >
                 Back To Map
               </button>

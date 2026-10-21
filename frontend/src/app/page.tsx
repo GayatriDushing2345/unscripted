@@ -1,221 +1,297 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { LilyFlower } from '@/components/LilyFlower';
 import { CharacterArt } from '@/components/CharacterArt';
+import { LilyFlower } from '@/components/LilyFlower';
 import {
   Sparkles,
   ArrowRight,
-  Flame,
-  Zap,
-  CheckCircle2,
-  Trophy,
-  ShieldCheck,
-  Star,
   Play,
+  Database,
+  ShieldCheck,
+  Zap,
+  Trophy,
+  Flame,
+  Star,
+  CheckCircle2,
+  Compass,
+  Cpu,
+  TrendingUp,
 } from 'lucide-react';
 
 export default function HomePage() {
   return (
-    <div className="relative overflow-hidden chapter-bg-1 min-h-screen">
+    <div className="relative overflow-hidden min-h-screen bg-[#FAF7F2] text-[#062419]">
       
-      {/* Decorative Floating Game Stars & Lilies */}
-      <div className="pointer-events-none absolute -top-20 -right-20 w-80 h-80 rounded-full bg-[#C084FC]/30 blur-3xl"></div>
-      <div className="pointer-events-none absolute top-1/3 -left-20 w-80 h-80 rounded-full bg-[#FB7185]/25 blur-3xl"></div>
-      <div className="pointer-events-none absolute bottom-10 right-10 w-96 h-96 rounded-full bg-[#34D399]/20 blur-3xl"></div>
+      {/* Subtle Atmospheric Radiance */}
+      <div className="pointer-events-none absolute -top-40 right-0 w-[600px] h-[600px] rounded-full bg-[#064E3B]/5 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-40 w-[500px] h-[500px] rounded-full bg-[#D4AF37]/5 blur-3xl" />
 
-      {/* HERO SECTION */}
-      <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* HERO SECTION WITH LARGE DRAMATIC TYPOGRAPHY */}
+      <section className="relative pt-16 pb-12 md:pt-24 md:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-4xl mx-auto space-y-6">
           
-          {/* Left Text & Call to Action */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border-2 border-[#E9D5FF] shadow-sm text-xs font-black text-[#7C3AED]">
-              <Sparkles className="w-4 h-4 text-[#F59E0B] fill-current" />
-              <span>THE AI CAREER DISCOVERY GAME FOR GEN Z & GEN ALPHA</span>
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-[#E5DDD1] shadow-xs text-xs font-black text-[#064E3B] uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping" />
+            <LilyFlower className="w-4 h-4 text-[#064E3B]" />
+            <span>The Empirical Career Arena Grounded in O*NET 29.0</span>
+          </div>
+
+          <h1 className="dramatic-hero-title text-5xl sm:text-7xl lg:text-8xl font-black text-[#062419] tracking-tight">
+            Your career has <br className="hidden sm:inline" />
+            <span className="italic font-serif bg-gradient-to-r from-[#064E3B] via-[#047857] to-[#D4AF37] bg-clip-text text-transparent">
+              no script.
+            </span>
+          </h1>
+
+          <p className="text-lg sm:text-2xl text-[#244637] font-medium max-w-2xl mx-auto leading-relaxed">
+            Ditch generic surveys. Step into an intentional <span className="font-bold text-[#064E3B]">15-stage journey</span>, simulate high-stakes workplace decisions with animated mentors, and build verified competence.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/journey"
+              className="emerald-btn-primary px-9 py-4 rounded-full text-base font-black tracking-wider uppercase inline-flex items-center gap-3"
+            >
+              <Play className="w-5 h-5 fill-current text-[#D4AF37]" />
+              <span>Enter 15-Stage Map</span>
+              <ArrowRight className="w-5 h-5 text-[#FAF7F2]" />
+            </Link>
+
+            <Link
+              href="/explore"
+              className="px-8 py-4 rounded-full bg-white border border-[#E5DDD1] hover:border-[#064E3B] text-base font-black tracking-wide text-[#062419] hover:bg-[#F5EFEB] transition-all inline-flex items-center gap-2"
+            >
+              <Compass className="w-5 h-5 text-[#047857]" />
+              <span>Trial of Horizons</span>
+            </Link>
+          </div>
+
+          {/* Trust Guarantees */}
+          <div className="pt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-black text-[#537566] uppercase tracking-wider">
+            <span className="flex items-center gap-2 text-[#064E3B]">
+              <CheckCircle2 className="w-4 h-4 text-[#10B981]" /> 15 Playable Quest Stages
+            </span>
+            <span className="flex items-center gap-2 text-[#064E3B]">
+              <Database className="w-4 h-4 text-[#047857]" /> Official O*NET 29.0 & BLS Data
+            </span>
+            <span className="flex items-center gap-2 text-[#064E3B]">
+              <Trophy className="w-4 h-4 text-[#D4AF37]" /> Persistent XP & MongoDB Sync
+            </span>
+          </div>
+
+        </div>
+      </section>
+
+      {/* DRAMATIC BENTO GRID SHOWCASE */}
+      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+          {/* BENTO ITEM 1: HERO MASTER CARD (2 cols, 2 rows) */}
+          <div className="md:col-span-2 lg:col-span-2 md:row-span-2 bento-card-emerald p-8 sm:p-10 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-black uppercase tracking-widest text-[#D4AF37] border border-[#D4AF37]/30">
+                  Core Progression Engine
+                </span>
+                <span className="text-xs font-black text-[#FAF7F2]/80">5 Biomes • 15 Levels</span>
+              </div>
+
+              <h3 className="font-serif text-3xl sm:text-4xl font-black text-white leading-tight">
+                The Winding Map of Becoming
+              </h3>
+
+              <p className="text-sm sm:text-base text-[#D1FAE5] font-medium leading-relaxed max-w-lg">
+                Move beyond static checklists. Advance step-by-step through 5 narrative chapters — from self-calibration to live production crisis simulations and capstone launches.
+              </p>
             </div>
 
-            <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#1E152A] leading-[1.08]">
-              Your Career Has No Script. <br />
-              <span className="bg-gradient-to-r from-[#7C3AED] via-[#F43F5E] to-[#F59E0B] bg-clip-text text-transparent italic">
-                Play The Journey!
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-xl text-[#64567A] max-w-2xl font-semibold leading-relaxed">
-              Ditch boring school questionnaires and generic dashboards. Step onto an interactive, winding Candy Crush-style
-              level map, conquer workplace simulations with animated mentors, and build real superpowers!
-            </p>
-
-            {/* Character Dialogue Bubble */}
-            <div className="game-card-3d p-5 sm:p-6 bg-white/95 flex items-start gap-4">
-              <CharacterArt character="aurelia" size={80} className="flex-shrink-0" />
+            {/* Mentor Art & Dialogue Highlight */}
+            <div className="my-8 p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-start gap-4">
+              <CharacterArt character="aurelia" size={72} className="flex-shrink-0" />
               <div className="space-y-1">
-                <span className="text-xs font-black uppercase text-[#7C3AED] tracking-wider block">
+                <span className="text-xs font-black uppercase tracking-wider text-[#D4AF37]">
                   Aurelia • Celestial Cartographer
                 </span>
-                <p className="font-serif italic text-sm sm:text-base text-[#1E152A] leading-relaxed">
-                  "No one is born with a script. Along our winding path of levels, unexpected futures are waiting to be unlocked. Choose your first stage!"
+                <p className="font-serif italic text-sm text-[#FAF7F2] leading-relaxed">
+                  "No one is born with a predetermined script. Along our winding path, unexpected mastery unfolds with every deliberate decision."
                 </p>
               </div>
             </div>
 
-            {/* Big Action Buttons */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <div className="pt-2 flex items-center justify-between border-t border-white/15">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#FAF7F2]/80">
+                <Star className="w-4 h-4 text-[#D4AF37] fill-current" />
+                <span>Next: Level 3 • The Mirror of Baseline</span>
+              </div>
               <Link
                 href="/journey"
-                className="game-btn-primary px-9 py-5 rounded-full text-base font-black tracking-wider uppercase inline-flex items-center justify-center gap-3"
+                className="gold-btn-accent px-5 py-2.5 rounded-full text-xs uppercase tracking-wider inline-flex items-center gap-1.5"
               >
-                <Play className="w-5 h-5 fill-current text-[#FEF08A]" />
-                <span>Play The Stage Map</span>
-                <ArrowRight className="w-5 h-5 text-[#FEF08A]" />
+                <span>Play Now</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
+            </div>
+          </div>
+
+          {/* BENTO ITEM 2: REAL O*NET 29.0 EMPIRICAL DATA */}
+          <div className="bento-card p-6 sm:p-7 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 flex items-center justify-center text-[#064E3B]">
+                <Database className="w-6 h-6" />
+              </div>
+              <span className="text-[11px] font-black uppercase tracking-wider text-[#064E3B] block">
+                Empirical Integrity
+              </span>
+              <h4 className="font-serif text-xl font-black text-[#062419]">
+                Zero Fabricated Numbers
+              </h4>
+              <p className="text-xs text-[#537566] leading-relaxed font-medium">
+                Grounded directly in US Department of Labor O*NET 29.0 and BLS median wage records. 900+ real occupation profiles.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-[#E5DDD1] flex items-center justify-between text-xs font-bold text-[#064E3B]">
+              <span>BLS Median Wages</span>
+              <span className="font-mono font-black text-[#062419]">$127,260</span>
+            </div>
+          </div>
+
+          {/* BENTO ITEM 3: SIMULATION ARENA */}
+          <div className="bento-card p-6 sm:p-7 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#F7EEDB] border border-[#C5A880] flex items-center justify-center text-[#064E3B]">
+                <Zap className="w-6 h-6 text-[#064E3B]" />
+              </div>
+              <span className="text-[11px] font-black uppercase tracking-wider text-[#B38A38] block">
+                Chapter 3 Arena
+              </span>
+              <h4 className="font-serif text-xl font-black text-[#062419]">
+                Crisis at 9:00 AM
+              </h4>
+              <p className="text-xs text-[#537566] leading-relaxed font-medium">
+                Simulate production outages and trade-off negotiations. Triage checkout errors under real pressure with Theron.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-[#E5DDD1] flex items-center justify-between text-xs font-bold text-[#064E3B]">
+              <span className="flex items-center gap-1">
+                <Flame className="w-4 h-4 text-[#D4AF37] fill-current" />
+                <span>Theron's Crucible</span>
+              </span>
+              <span className="font-black text-[#047857]">+200 XP</span>
+            </div>
+          </div>
+
+          {/* BENTO ITEM 4: PLAYER GUILD & XP STATS */}
+          <div className="bento-card p-6 sm:p-7 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-2xl bg-[#064E3B] text-white flex items-center justify-center font-black text-sm border border-[#D4AF37]">
+                  LV 2
+                </div>
+                <span className="px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[10px] font-black uppercase text-[#064E3B] border border-[#047857]/20">
+                  Active Guild
+                </span>
+              </div>
+              <h4 className="font-serif text-xl font-black text-[#062419]">
+                Continuous Mastery
+              </h4>
+              <p className="text-xs text-[#537566] leading-relaxed font-medium">
+                Every completed challenge, baseline calibration, and simulation feeds your persistent MongoDB profile.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-[#E5DDD1] flex items-center justify-between text-xs font-black">
+              <span className="text-[#537566]">XP Level 2</span>
+              <span className="text-[#064E3B]">225 / 500 XP</span>
+            </div>
+          </div>
+
+          {/* BENTO ITEM 5: RIASEC & POLYMATH RADAR */}
+          <div className="bento-card p-6 sm:p-7 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 flex items-center justify-center text-[#064E3B]">
+                <TrendingUp className="w-6 h-6" />
+              </div>
+              <span className="text-[11px] font-black uppercase tracking-wider text-[#064E3B] block">
+                Psychometric Mapping
+              </span>
+              <h4 className="font-serif text-xl font-black text-[#062419]">
+                Holland RIASEC Alignment
+              </h4>
+              <p className="text-xs text-[#537566] leading-relaxed font-medium">
+                Connect your intellectual rhythm directly with Investigative, Artistic, and Enterprising archetype vectors.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t border-[#E5DDD1] flex items-center justify-between text-xs font-bold text-[#064E3B]">
+              <span>Curiosity Vectors</span>
+              <span className="font-mono font-black text-[#062419]">94% Match</span>
+            </div>
+          </div>
+
+          {/* BENTO ITEM 6: 5 CHAPTER WORLDS OVERVIEW (2 cols) */}
+          <div className="md:col-span-2 lg:col-span-2 bento-card-ivory p-7 sm:p-8 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#D4AF37] fill-current" />
+                <span className="text-xs font-black uppercase tracking-widest text-[#064E3B]">
+                  Structured 5-Chapter Curriculum
+                </span>
+              </div>
+              <h3 className="font-serif text-2xl font-black text-[#062419]">
+                From Initial Curiosity to Real-World Mastery
+              </h3>
+              <p className="text-xs sm:text-sm text-[#537566] leading-relaxed max-w-xl">
+                Chapter 1: The Unknown • Chapter 2: The Possibilities • Chapter 3: A Day In Their Shoes • Chapter 4: Build Your Path • Chapter 5: Your Next Horizon.
+              </p>
+            </div>
+
+            <div className="pt-6 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <CharacterArt character="theron" size={48} className="w-10 h-10" />
+                <CharacterArt character="rowan" size={48} className="w-10 h-10" />
+                <CharacterArt character="aurelia" size={48} className="w-10 h-10" />
+                <span className="text-xs font-bold text-[#244637]">Guided by 3 Adaptive Mentors</span>
+              </div>
               <Link
                 href="/explore"
-                className="game-btn-coral px-8 py-5 rounded-full text-base font-black tracking-wider uppercase inline-flex items-center justify-center gap-2"
+                className="emerald-btn-primary px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5"
               >
-                <span>Start Self-Discovery Quest</span>
+                <span>Begin Discovery</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
-
-            {/* Micro Highlights */}
-            <div className="pt-3 flex flex-wrap items-center gap-6 text-xs font-black text-[#64567A]">
-              <span className="flex items-center gap-1.5 text-[#059669]">
-                <CheckCircle2 className="w-4 h-4 text-[#10B981]" /> 15 Playable Stages
-              </span>
-              <span className="flex items-center gap-1.5 text-[#7C3AED]">
-                <CheckCircle2 className="w-4 h-4 text-[#7C3AED]" /> Real Job Simulations
-              </span>
-              <span className="flex items-center gap-1.5 text-[#D97706]">
-                <CheckCircle2 className="w-4 h-4 text-[#F59E0B]" /> Persistent XP & Levels
-              </span>
-            </div>
-          </div>
-
-          {/* Right Visual 3D Showcase */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              
-              {/* Main Game Preview Box */}
-              <div className="game-card-3d p-4 bg-white">
-                <div className="relative h-80 sm:h-96 w-full rounded-2xl overflow-hidden bg-gradient-to-br from-[#7C3AED] via-[#9333EA] to-[#F43F5E] p-4 flex flex-col justify-between text-white">
-                  
-                  {/* Top Floating Badge */}
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
-                      <Zap className="w-3.5 h-3.5 text-[#FEF08A] fill-current" />
-                      Candy Crush Progression Engine
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-[#FEF08A] text-[#1E152A] text-xs font-black">
-                      Lv 2 Explorer
-                    </span>
-                  </div>
-
-                  {/* Character Artwork Trio */}
-                  <div className="flex items-center justify-center gap-4 my-auto">
-                    <CharacterArt character="rowan" size={90} className="w-20 h-20 drop-shadow-lg" />
-                    <CharacterArt character="aurelia" size={110} className="w-24 h-24 drop-shadow-xl" />
-                    <CharacterArt character="theron" size={90} className="w-20 h-20 drop-shadow-lg" />
-                  </div>
-
-                  {/* Bottom Level Indicator */}
-                  <div className="p-3.5 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-[#FEF08A]">Active Horizon</span>
-                      <h4 className="font-black text-sm text-white">Frontend Software Engineer</h4>
-                    </div>
-                    <Link
-                      href="/journey"
-                      className="px-4 py-2 rounded-xl bg-white text-[#7C3AED] text-xs font-black uppercase tracking-wider shadow-sm hover:scale-105 transition-transform"
-                    >
-                      Stage 3 Ready →
-                    </Link>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
           </div>
 
         </div>
+
       </section>
 
-      {/* THREE CHAPTER WORLDS PREVIEW */}
-      <section className="py-20 bg-white/80 border-y-2 border-[#E9D5FF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-3">
-            <span className="text-xs font-black uppercase tracking-widest text-[#7C3AED] bg-[#EDE9FE] px-3.5 py-1 rounded-full inline-block">
-              5 Epic Narrative Chapters
-            </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-black text-[#1E152A]">
-              How You Play Your Career Journey
-            </h2>
-            <p className="text-sm font-semibold text-[#64567A]">
-              Progress level-by-level along the winding path. Complete strategic quests to unlock next regions.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
-            {/* World 1 */}
-            <div className="game-card-3d p-7 bg-[#FAF5FF] space-y-4 hover:scale-104 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-[#EDE9FE] border-2 border-[#C084FC] flex items-center justify-center text-[#7C3AED] shadow-sm">
-                <Sparkles className="w-7 h-7" />
-              </div>
-              <span className="text-xs font-black uppercase tracking-wider text-[#7C3AED] block">Chapter 1 & 2</span>
-              <h3 className="font-black text-xl text-[#1E152A]">Self-Discovery & Horizons</h3>
-              <p className="text-xs font-semibold text-[#64567A] leading-relaxed">
-                Meet Aurelia and Rowan. Pick your curiosities, inventory your baseline superpowers, and reveal top career paths.
-              </p>
-            </div>
-
-            {/* World 2 */}
-            <div className="game-card-3d p-7 bg-[#FFF1F2] space-y-4 hover:scale-104 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-[#FFE4E6] border-2 border-[#FB7185] flex items-center justify-center text-[#F43F5E] shadow-sm">
-                <Zap className="w-7 h-7" />
-              </div>
-              <span className="text-xs font-black uppercase tracking-wider text-[#F43F5E] block">Chapter 3</span>
-              <h3 className="font-black text-xl text-[#1E152A]">A Day In Their Shoes</h3>
-              <p className="text-xs font-semibold text-[#64567A] leading-relaxed">
-                Step into live workplace simulations with Theron. Triage a 9:00 AM production crisis and negotiate sprint trade-offs!
-              </p>
-            </div>
-
-            {/* World 3 */}
-            <div className="game-card-3d p-7 bg-[#F0FDF4] space-y-4 hover:scale-104 transition-all">
-              <div className="w-14 h-14 rounded-2xl bg-[#DCFCE7] border-2 border-[#86EFAC] flex items-center justify-center text-[#10B981] shadow-sm">
-                <Trophy className="w-7 h-7" />
-              </div>
-              <span className="text-xs font-black uppercase tracking-wider text-[#10B981] block">Chapter 4 & 5</span>
-              <h3 className="font-black text-xl text-[#1E152A]">Build Your Real Path</h3>
-              <p className="text-xs font-semibold text-[#64567A] leading-relaxed">
-                Construct autonomous mini-challenges, ship real portfolio artifacts, and step into the real world with confidence.
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* FINAL PLAY CTA */}
+      {/* FINAL CALL TO ADVENTURE */}
       <section className="py-20 text-center space-y-6 max-w-3xl mx-auto px-4">
         <CharacterArt character="aurelia" size={110} className="mx-auto" />
-        <h2 className="font-serif text-3xl sm:text-5xl font-black text-[#1E152A]">
-          Ready to enter the game?
+        
+        <h2 className="dramatic-hero-title text-4xl sm:text-6xl font-black text-[#062419]">
+          Step into your <br />
+          <span className="italic font-serif text-[#064E3B]">unwritten horizon.</span>
         </h2>
-        <p className="text-base font-semibold text-[#64567A] max-w-lg mx-auto">
-          Start on Level 1, meet the mentors, and watch your future unfold along the winding stage map.
+        
+        <p className="text-base sm:text-lg font-medium text-[#244637] max-w-lg mx-auto">
+          Start on Level 1, conquer all 15 stages, and build proof of who you can become.
         </p>
-        <div>
+
+        <div className="pt-2">
           <Link
             href="/journey"
-            className="game-btn-primary px-10 py-5 rounded-full text-base font-black uppercase tracking-wider inline-flex items-center gap-3"
+            className="emerald-btn-primary px-10 py-5 rounded-full text-base font-black uppercase tracking-wider inline-flex items-center gap-3"
           >
-            <Play className="w-5 h-5 fill-current text-[#FEF08A]" />
-            <span>Launch Level Map</span>
+            <Play className="w-5 h-5 fill-current text-[#D4AF37]" />
+            <span>Launch Stage Map</span>
+            <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </section>

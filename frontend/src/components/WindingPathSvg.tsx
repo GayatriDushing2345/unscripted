@@ -15,7 +15,7 @@ export const WindingPathSvg: React.FC<WindingPathSvgProps> = ({
 
   // Calculate coordinates for each node index
   const points = Array.from({ length: totalNodes }).map((_, i) => {
-    // Candy Crush wide oscillation
+    // Wide smooth oscillation
     const angle = i * 1.15;
     const x = width / 2 + Math.sin(angle) * (width * 0.32);
     const y = 80 + i * nodeSpacing;
@@ -40,59 +40,59 @@ export const WindingPathSvg: React.FC<WindingPathSvgProps> = ({
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        {/* Bold vibrant gradient along the winding track */}
-        <linearGradient id="candyRoadGradient" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#A855F7" />
-          <stop offset="25%" stopColor="#FB7185" />
-          <stop offset="50%" stopColor="#38BDF8" />
-          <stop offset="75%" stopColor="#34D399" />
-          <stop offset="100%" stopColor="#FBBF24" />
+        {/* Emerald to Champagne Gold Road Gradient */}
+        <linearGradient id="emeraldRoadGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#064E3B" />
+          <stop offset="25%" stopColor="#047857" />
+          <stop offset="50%" stopColor="#10B981" />
+          <stop offset="75%" stopColor="#059669" />
+          <stop offset="100%" stopColor="#D4AF37" />
         </linearGradient>
 
         <linearGradient id="pavingPattern" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
-          <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.2" />
+          <stop offset="0%" stopColor="#FAF7F2" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#FAF7F2" stopOpacity="0.3" />
         </linearGradient>
 
         <filter id="roadShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="#7C3AED" floodOpacity="0.25" />
+          <feDropShadow dx="0" dy="6" stdDeviation="6" floodColor="#064E3B" floodOpacity="0.18" />
         </filter>
       </defs>
 
-      {/* Chunky Under-track Border */}
+      {/* Chunky Ivory Under-track Border */}
       <path
         d={pathD}
-        stroke="#E9D5FF"
-        strokeWidth="28"
+        stroke="#E5DDD1"
+        strokeWidth="30"
         strokeLinecap="round"
         fill="none"
       />
 
-      {/* Vibrant Rainbow Stone Path */}
+      {/* Rich Emerald & Gold Stone Path */}
       <path
         d={pathD}
-        stroke="url(#candyRoadGradient)"
-        strokeWidth="16"
+        stroke="url(#emeraldRoadGradient)"
+        strokeWidth="18"
         strokeLinecap="round"
         fill="none"
         filter="url(#roadShadow)"
       />
 
-      {/* Stepping Dash Stones */}
+      {/* Stepping Dash Stones in Warm Ivory */}
       <path
         d={pathD}
         stroke="url(#pavingPattern)"
         strokeWidth="6"
-        strokeDasharray="12 12"
+        strokeDasharray="12 14"
         strokeLinecap="round"
         fill="none"
       />
 
-      {/* Floating Star & Gem Waypoints along the path */}
+      {/* Waypoint Markers */}
       {points.map((pt, idx) => (
         <g key={idx} transform={`translate(${pt.x}, ${pt.y})`}>
-          <circle r="7" fill="#FFFFFF" stroke="#7C3AED" strokeWidth="2.5" />
-          <circle r="3" fill="#F43F5E" />
+          <circle r="8" fill="#FAF7F2" stroke="#064E3B" strokeWidth="2.5" />
+          <circle r="3.5" fill="#D4AF37" />
         </g>
       ))}
     </svg>

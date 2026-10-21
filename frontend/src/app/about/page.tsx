@@ -1,122 +1,120 @@
 import React from 'react';
 import Link from 'next/link';
 import { LilyFlower } from '@/components/LilyFlower';
-import { CharacterVoice } from '@/components/CharacterVoice';
-import { ArrowRight, Compass, ShieldCheck, TrendingUp, Sparkles, HeartHandshake } from 'lucide-react';
+import { CharacterArt } from '@/components/CharacterArt';
+import { ArrowRight, Compass, ShieldCheck, TrendingUp, Sparkles, Trophy, Play } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-[85vh] py-16 px-4 sm:px-6 lg:px-8 bg-story-gradient">
+    <div className="min-h-[85vh] py-16 px-4 sm:px-6 lg:px-8 bg-[#FAF7F2] text-[#062419]">
       <div className="max-w-4xl mx-auto space-y-16">
         
         {/* Header */}
         <div className="text-center space-y-4">
-          <div className="inline-flex p-3 rounded-2xl bg-white border border-[#EAE3D9] shadow-sm">
-            <LilyFlower className="w-8 h-8 text-[#9C8EB9]" />
+          <div className="inline-flex p-3 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 shadow-xs">
+            <LilyFlower className="w-8 h-8 text-[#064E3B]" />
           </div>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#2C2638] tracking-tight">
+          <h1 className="font-serif text-4xl sm:text-6xl font-black text-[#062419] tracking-tight">
             The Unscripted Manifesto
           </h1>
-          <p className="text-base sm:text-lg text-[#6B6275] max-w-2xl mx-auto leading-relaxed">
-            Your career has no predetermined script. We built Unscripted to replace algorithmic boxes
-            with human curiosity, grounded competence, and the courage to begin.
+          <p className="text-base sm:text-xl text-[#244637] max-w-2xl mx-auto leading-relaxed font-medium">
+            Your career has no predetermined script. We built Unscripted to replace generic questionnaires
+            with authentic curiosity, empirical O*NET reality, and verifiable competence.
           </p>
         </div>
 
-        {/* Guide Narration */}
-        <CharacterVoice
-          character="guide"
-          contextTitle="Our Origin Story"
-          quote="For decades, students have been asked 'What do you want to be when you grow up?' as though the destination is a single point on a map. We believe you are a traveler continually expanding the territory of who you could become."
-        />
+        {/* Guide Narration Card */}
+        <div className="bento-card-emerald p-8 sm:p-10 flex flex-col sm:flex-row items-center gap-6">
+          <CharacterArt character="aurelia" size={105} className="flex-shrink-0" />
+          <div className="space-y-2 text-center sm:text-left">
+            <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37]">
+              Aurelia • Celestial Cartographer
+            </span>
+            <p className="font-serif italic text-base sm:text-lg text-[#FAF7F2] leading-relaxed">
+              "For decades, students have been asked 'What do you want to be when you grow up?' as though destination is a single point on a map. We believe you are a traveler continually expanding the territory of who you could become."
+            </p>
+          </div>
+        </div>
 
-        {/* 3 Pillars */}
+        {/* 3 Pillars in Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-3xl bg-white border border-[#EAE3D9] space-y-3 shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-[#ECE7F5] flex items-center justify-center text-[#9C8EB9]">
-              <Compass className="w-5 h-5" />
+          <div className="bento-card p-6 sm:p-7 space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 flex items-center justify-center text-[#064E3B]">
+              <Compass className="w-6 h-6" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#2C2638]">Discovery, Not Assignment</h3>
-            <p className="text-xs text-[#6B6275] leading-relaxed">
-              We never tell you who you are or assign you a permanent career path. We help you explore multiple horizons
-              and understand what each path genuinely demands.
+            <h3 className="font-serif text-xl font-black text-[#062419]">Discovery, Not Assignment</h3>
+            <p className="text-xs text-[#537566] leading-relaxed font-medium">
+              We never pigeonhole you into a fixed category. We help you explore adjacent horizons and understand what each craft genuinely demands.
             </p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border border-[#EAE3D9] space-y-3 shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-[#FBEBE9] flex items-center justify-center text-[#B86E66]">
-              <ShieldCheck className="w-5 h-5" />
+          <div className="bento-card p-6 sm:p-7 space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#F7EEDB] border border-[#C5A880] flex items-center justify-center text-[#064E3B]">
+              <ShieldCheck className="w-6 h-6 text-[#064E3B]" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#2C2638]">Honest Reality Checks</h3>
-            <p className="text-xs text-[#6B6275] leading-relaxed">
-              Every career highlights the beginner reality: the frustrating debugging sessions, the initial awkwardness,
-              and the exact empirical skills required to turn enthusiasm into mastery.
+            <h3 className="font-serif text-xl font-black text-[#062419]">Honest Reality Checks</h3>
+            <p className="text-xs text-[#537566] leading-relaxed font-medium">
+              Every horizon details the beginner friction: the tedious debugging sessions, the initial awkwardness, and real BLS salary distributions.
             </p>
           </div>
 
-          <div className="p-6 rounded-3xl bg-white border border-[#EAE3D9] space-y-3 shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-[#EBF2EC] flex items-center justify-center text-[#4D6C58]">
-              <TrendingUp className="w-5 h-5" />
+          <div className="bento-card p-6 sm:p-7 space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 flex items-center justify-center text-[#064E3B]">
+              <TrendingUp className="w-6 h-6" />
             </div>
-            <h3 className="font-serif text-lg font-bold text-[#2C2638]">Adaptive Milestones</h3>
-            <p className="text-xs text-[#6B6275] leading-relaxed">
-              As you build and check off deliverables, your 3-Horizon roadmap recalibrates. Progress is persisted
-              in real databases, preserving every step of your momentum.
+            <h3 className="font-serif text-xl font-black text-[#062419]">15-Stage Adaptive Mastery</h3>
+            <p className="text-xs text-[#537566] leading-relaxed font-medium">
+              Conquer interactive crisis simulations, earn stars and XP, and persist your progress safely in MongoDB across every milestone.
             </p>
           </div>
         </div>
 
-        {/* Cast of Voices */}
-        <div className="bg-white p-8 rounded-3xl border border-[#EAE3D9] space-y-6 shadow-sm">
+        {/* Cast of Mentors */}
+        <div className="bento-card p-8 sm:p-10 space-y-6">
           <div className="text-center space-y-1">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#9C8EB9]">Our Narrative Mentors</span>
-            <h3 className="font-serif text-2xl font-bold text-[#2C2638]">The Voices Accompanying Your Journey</h3>
+            <span className="text-xs font-black uppercase tracking-widest text-[#064E3B]">Our Narrative Mentors</span>
+            <h3 className="font-serif text-2xl sm:text-3xl font-black text-[#062419]">The Voices Guiding Your Journey</h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-[#EAE3D9] space-y-2 text-center">
-              <div className="w-12 h-12 rounded-full bg-[#ECE7F5] text-[#6A5A87] flex items-center justify-center mx-auto font-serif font-bold text-lg">
-                A
-              </div>
-              <div className="font-serif font-bold text-sm text-[#2C2638]">Aurelia</div>
-              <div className="text-[10px] uppercase font-bold text-[#9C8EB9]">The Cartographer & Guide</div>
-              <p className="text-xs text-[#6B6275]">
-                Welcomes you into discovery, introduces possibilities, and maps your curious instincts.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+            <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E5DDD1] space-y-3 text-center">
+              <CharacterArt character="aurelia" size={80} className="mx-auto" />
+              <div className="font-serif font-black text-base text-[#062419]">Aurelia</div>
+              <div className="text-[10px] uppercase font-black text-[#064E3B]">The Celestial Cartographer</div>
+              <p className="text-xs text-[#537566] leading-relaxed">
+                Maps your curious instincts, introduces emerging horizons, and awards completion crests.
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-[#EAE3D9] space-y-2 text-center">
-              <div className="w-12 h-12 rounded-full bg-[#FBEBE9] text-[#B86E66] flex items-center justify-center mx-auto font-serif font-bold text-lg">
-                R
-              </div>
-              <div className="font-serif font-bold text-sm text-[#2C2638]">Rowan</div>
-              <div className="text-[10px] uppercase font-bold text-[#B86E66]">The Horizon Explorer</div>
-              <p className="text-xs text-[#6B6275]">
-                Encourages unscripted curiosity, links unexpected disciplines, and identifies hidden strengths.
+            <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E5DDD1] space-y-3 text-center">
+              <CharacterArt character="rowan" size={80} className="mx-auto" />
+              <div className="font-serif font-black text-base text-[#062419]">Rowan</div>
+              <div className="text-[10px] uppercase font-black text-[#047857]">The Horizon Explorer</div>
+              <p className="text-xs text-[#537566] leading-relaxed">
+                Encourages unscripted interdisciplinary curiosity and connects design with system engineering.
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#FAF7F2] border border-[#EAE3D9] space-y-2 text-center">
-              <div className="w-12 h-12 rounded-full bg-[#EBF2EC] text-[#4D6C58] flex items-center justify-center mx-auto font-serif font-bold text-lg">
-                T
-              </div>
-              <div className="font-serif font-bold text-sm text-[#2C2638]">Theron</div>
-              <div className="text-[10px] uppercase font-bold text-[#4D6C58]">The Realist Mentor</div>
-              <p className="text-xs text-[#6B6275]">
-                Unpacks workplace reality checks, structures deliberate practice, and keeps momentum grounded.
+            <div className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E5DDD1] space-y-3 text-center">
+              <CharacterArt character="theron" size={80} className="mx-auto" />
+              <div className="font-serif font-black text-base text-[#062419]">Theron</div>
+              <div className="text-[10px] uppercase font-black text-[#B38A38]">The Iron Strategy Mentor</div>
+              <p className="text-xs text-[#537566] leading-relaxed">
+                Tests your problem-solving under real pressure with 9:00 AM production triage simulations.
               </p>
             </div>
           </div>
         </div>
 
-        {/* CTA */}
+        {/* Final CTA */}
         <div className="text-center pt-4">
           <Link
-            href="/explore"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-white bg-[#2C2638] hover:bg-[#433B52] shadow-lg transition-all"
+            href="/journey"
+            className="emerald-btn-primary px-9 py-4 rounded-full text-sm font-black uppercase tracking-wider inline-flex items-center gap-3"
           >
-            <span>Begin Your Unscripted Story</span>
-            <ArrowRight className="w-4 h-4 text-[#E2A7A1]" />
+            <Play className="w-4 h-4 fill-current text-[#D4AF37]" />
+            <span>Launch 15-Stage Horizon Map</span>
+            <ArrowRight className="w-4 h-4 text-[#FAF7F2]" />
           </Link>
         </div>
 

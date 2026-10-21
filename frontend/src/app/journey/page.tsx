@@ -75,10 +75,10 @@ export default function JourneyMapPage() {
 
   if (loading || !journey) {
     return (
-      <div className="min-h-[85vh] flex flex-col items-center justify-center space-y-4 chapter-bg-1">
+      <div className="min-h-[85vh] flex flex-col items-center justify-center space-y-4 bg-[#FAF7F2]">
         <CharacterArt character="aurelia" size={130} />
-        <p className="font-serif italic font-black text-xl text-[#7C3AED] animate-pulse">
-          Generating Your Candy Crush-Style Game Realm...
+        <p className="font-serif italic font-black text-xl text-[#064E3B] animate-pulse">
+          Calibrating Your 15-Stage Horizon Map...
         </p>
       </div>
     );
@@ -94,49 +94,49 @@ export default function JourneyMapPage() {
     stages[0];
 
   const chapterMeta = [
-    { num: 1, title: 'Chapter 1: The Unknown', subtitle: 'Self-Discovery & Baseline Calibrations', bannerGrad: 'from-[#8B5CF6] to-[#C084FC]', character: 'aurelia' as const },
-    { num: 2, title: 'Chapter 2: The Possibilities', subtitle: 'Horizons & Honest Reality Checks', bannerGrad: 'from-[#F43F5E] to-[#FB923C]', character: 'rowan' as const },
-    { num: 3, title: 'Chapter 3: A Day In Their Shoes', subtitle: 'Interactive Workplace Simulations', bannerGrad: 'from-[#06B6D4] to-[#10B981]', character: 'theron' as const },
-    { num: 4, title: 'Chapter 4: Build Your Path', subtitle: 'Real Artifacts & Mini-Build Challenges', bannerGrad: 'from-[#7C3AED] to-[#3B82F6]', character: 'theron' as const },
-    { num: 5, title: 'Chapter 5: Your Next Horizon', subtitle: 'The Real World Awaits (Unscripted Future)', bannerGrad: 'from-[#F59E0B] to-[#F43F5E]', character: 'aurelia' as const },
+    { num: 1, title: 'Chapter 1: The Unknown', subtitle: 'Self-Discovery & Baseline Calibration', bannerGrad: 'from-[#064E3B] to-[#047857]', character: 'aurelia' as const },
+    { num: 2, title: 'Chapter 2: The Possibilities', subtitle: 'Horizons & Empirical Reality Checks', bannerGrad: 'from-[#047857] to-[#10B981]', character: 'rowan' as const },
+    { num: 3, title: 'Chapter 3: A Day In Their Shoes', subtitle: 'Live Workplace Crisis Simulations', bannerGrad: 'from-[#022C22] to-[#064E3B]', character: 'theron' as const },
+    { num: 4, title: 'Chapter 4: Build Your Path', subtitle: 'Flagship Artifacts & Mini-Challenges', bannerGrad: 'from-[#065F46] to-[#D4AF37]', character: 'theron' as const },
+    { num: 5, title: 'Chapter 5: Your Next Horizon', subtitle: 'The Real World Awaits (Unscripted Future)', bannerGrad: 'from-[#D4AF37] to-[#064E3B]', character: 'aurelia' as const },
   ];
 
   return (
-    <div className="min-h-screen chapter-bg-1 pb-36">
+    <div className="min-h-screen bg-[#FAF7F2] pb-36 text-[#062419]">
 
-      {/* TOP GAME HUD */}
-      <div className="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b-2 border-[#E9D5FF] shadow-md px-4 py-3.5">
+      {/* TOP GAME HUD IN EMERALD & WARM IVORY */}
+      <div className="sticky top-20 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E5DDD1] shadow-xs px-4 py-3.5">
         <div className="max-w-5xl mx-auto flex items-center justify-between gap-3">
 
           {/* Level & XP Jewel */}
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#C026D3] text-white flex items-center justify-center font-black text-base shadow-md border-2 border-[#FEF08A]">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#064E3B] to-[#022C22] text-[#FAF7F2] flex items-center justify-center font-black text-base shadow-sm border-2 border-[#D4AF37]">
                 LV {journey.playerLevel || 2}
               </div>
               <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#FBBF24]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-[#D4AF37]" />
               </span>
             </div>
 
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-black text-sm sm:text-base text-[#1E152A]">
+                <span className="font-serif font-black text-sm sm:text-base text-[#062419]">
                   {user?.name || 'Explorer'}
                 </span>
-                <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-[#EDE9FE] text-[#7C3AED] border border-[#DDD6FE]">
+                <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#064E3B] border border-[#047857]/20">
                   CH {journey.currentChapter || 1}
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-xs font-bold text-[#64567A]">
-                <div className="flex items-center gap-1 text-[#D97706]">
-                  <Sparkles className="w-3.5 h-3.5 fill-current" />
+              <div className="flex items-center gap-2 text-xs font-bold text-[#537566]">
+                <div className="flex items-center gap-1 text-[#064E3B]">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] fill-current" />
                   <span>{journey.playerXp || 225} XP</span>
                 </div>
                 <Link
                   href={`/reality-check?id=${journey.careerId || '15-1252.00'}`}
-                  className="hidden sm:inline text-[#7C3AED] hover:underline font-black"
+                  className="hidden sm:inline text-[#047857] hover:underline font-bold"
                 >
                   • Horizon: {journey.careerName || 'Software Developer'}
                 </Link>
@@ -144,15 +144,15 @@ export default function JourneyMapPage() {
             </div>
           </div>
 
-          {/* Streak & Completion Badge */}
+          {/* Streak & Completion Badges */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-[#FFE4E6] border-2 border-[#FB7185] text-[#E11D48] text-xs font-black shadow-xs">
-              <Flame className="w-4 h-4 fill-current animate-bounce-slow" />
+            <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-[#F7EEDB] border border-[#C5A880] text-[#022C22] text-xs font-black shadow-xs">
+              <Flame className="w-4 h-4 text-[#D4AF37] fill-current animate-bounce-slow" />
               <span>{journey.currentStreakDays || 3} DAYS</span>
             </div>
 
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#D1FAE5] border-2 border-[#10B981] text-[#065F46] text-xs font-black shadow-xs">
-              <Trophy className="w-4 h-4 text-[#059669]" />
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 text-[#064E3B] text-xs font-black shadow-xs">
+              <Trophy className="w-4 h-4 text-[#064E3B]" />
               <span>{journey.overallProgress}% CLEARED</span>
             </div>
           </div>
@@ -162,36 +162,35 @@ export default function JourneyMapPage() {
 
       {/* TOP CHARACTER GREETING BANNER */}
       <div className="max-w-4xl mx-auto px-4 pt-10">
-        <div className="game-card-3d p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 bg-white/95">
+        <div className="bento-card p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 bg-white">
           <CharacterArt character="aurelia" size={105} className="flex-shrink-0" />
           <div className="space-y-2 text-center sm:text-left flex-1">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EDE9FE] text-xs font-black text-[#7C3AED]">
-              <Sparkles className="w-3.5 h-3.5 text-[#F59E0B] fill-current" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ECFDF5] text-xs font-black text-[#064E3B] border border-[#047857]/20">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] fill-current" />
               <span>Aurelia • Celestial Cartographer</span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-black text-[#1E152A]">
+            <h2 className="font-serif text-3xl sm:text-4xl font-black text-[#062419]">
               The Winding Map of Becoming
             </h2>
-            <p className="text-xs sm:text-sm text-[#64567A] leading-relaxed max-w-xl font-medium">
-              Tap any unlocked level along the winding path to engage in story dialogues, conquer workplace crisis simulations, and collect stars & XP toward your career horizon!
+            <p className="text-xs sm:text-sm text-[#537566] leading-relaxed max-w-xl font-medium">
+              Select any unlocked stage along the winding emerald path to participate in story dialogues, conquer workplace crisis simulations, and collect stars & XP toward your career horizon!
             </p>
           </div>
         </div>
       </div>
 
-      {/* THE CANDY CRUSH-STYLE WINDING ROAD MAP */}
+      {/* THE WINDING ROAD MAP */}
       <div className="max-w-lg mx-auto px-4 pt-12 relative">
         <div
-          className="relative w-full rounded-[2.5rem] bg-white/85 backdrop-blur-md border-4 border-[#E9D5FF] shadow-[0_20px_60px_rgba(124,58,237,0.18)] overflow-hidden py-16 px-6"
+          className="relative w-full rounded-[2.5rem] bg-white border-2 border-[#E5DDD1] shadow-[0_20px_60px_rgba(6,78,59,0.08)] overflow-hidden py-16 px-6"
           style={{ minHeight: `${mapHeight}px` }}
         >
-          {/* Animated Rainbow Winding S-Road */}
+          {/* Emerald & Warm Ivory Winding S-Road */}
           <WindingPathSvg totalNodes={totalStages} height={mapHeight} width={450} />
 
-          {/* Chapter Worlds & Juicy Nodes */}
+          {/* Chapter Worlds & Nodes */}
           <div className="relative z-10 flex flex-col items-center justify-between h-full space-y-20">
             {stages.map((stage, idx) => {
-              // Wide oscillation left-right
               const oscillation = Math.sin(idx * 1.15) * 36;
               const isChapterStart = idx % 3 === 0;
               const meta = chapterMeta[stage.chapterNumber - 1] || chapterMeta[0];
@@ -199,19 +198,19 @@ export default function JourneyMapPage() {
               return (
                 <div key={stage.id} className="w-full flex flex-col items-center relative">
 
-                  {/* Big Region Gateway Banner */}
+                  {/* Region Gateway Banner */}
                   {isChapterStart && (
-                    <div className="my-8 px-6 py-3 rounded-3xl bg-gradient-to-r from-white via-[#FAF5FF] to-white border-2 border-[#E9D5FF] shadow-lg text-center max-w-xs animate-pop">
+                    <div className="my-8 px-6 py-3.5 rounded-3xl bg-gradient-to-r from-white via-[#FAF7F2] to-white border border-[#E5DDD1] shadow-sm text-center max-w-xs animate-pop">
                       <div className="flex items-center justify-center gap-2 mb-1">
                         <CharacterArt character={meta.character} size={40} className="w-8 h-8" />
-                        <span className="text-[11px] font-black uppercase tracking-wider text-[#7C3AED]">
+                        <span className="text-[11px] font-black uppercase tracking-wider text-[#064E3B]">
                           Region {stage.chapterNumber}
                         </span>
                       </div>
-                      <h4 className="font-black text-base text-[#1E152A]">
+                      <h4 className="font-serif font-black text-base text-[#062419]">
                         {meta.title}
                       </h4>
-                      <p className="text-[11px] font-semibold text-[#64567A]">
+                      <p className="text-[11px] font-semibold text-[#537566]">
                         {meta.subtitle}
                       </p>
                     </div>
@@ -235,20 +234,20 @@ export default function JourneyMapPage() {
         </div>
       </div>
 
-      {/* FLOATING ACTION LAUNCHER: User Never Wonders What To Do Next */}
+      {/* FLOATING ACTION LAUNCHER: Always Prompts the Next Level */}
       {currentPlayableStage && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-full max-w-md px-4">
           <button
             onClick={() => setSelectedStage(currentPlayableStage)}
-            className="w-full game-btn-primary py-4 px-6 rounded-full shadow-[0_8px_25px_rgba(124,58,237,0.5)] flex items-center justify-between text-xs sm:text-sm font-black uppercase tracking-wider animate-bounce-slow"
+            className="w-full emerald-btn-primary py-4 px-6 rounded-full shadow-[0_8px_25px_rgba(6,78,59,0.35)] flex items-center justify-between text-xs sm:text-sm font-black uppercase tracking-wider animate-bounce-slow"
           >
             <div className="flex items-center gap-2.5">
-              <Play className="w-5 h-5 fill-current text-[#FEF08A]" />
+              <Play className="w-5 h-5 fill-current text-[#D4AF37]" />
               <span className="truncate">
                 Next: Level {currentPlayableStage.stageNumber} • {currentPlayableStage.title}
               </span>
             </div>
-            <span className="bg-[#5B21B6] text-[#FEF08A] px-3 py-1 rounded-full text-xs font-black flex-shrink-0">
+            <span className="bg-[#022C22] text-[#D4AF37] px-3 py-1 rounded-full text-xs font-black flex-shrink-0 border border-[#D4AF37]/30">
               +{currentPlayableStage.xpReward} XP
             </span>
           </button>

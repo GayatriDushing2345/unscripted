@@ -156,8 +156,9 @@ public class RoadmapService {
                 "No more tutorials. Create a real working prototype with local storage persistence and responsive layout.",
                 "LOCKED", "Complete Stage 9", 250, false
         );
-        s10.setObjectives(List.of("Setup modern dev environment", "Submit repository or prototype link"));
-        s10.getChoices().add(new StageChoice("c15", "Mark starter project build as complete and verified", "Verified. Concrete proof of competence recorded.", "Execution", true));
+        s10.setObjectives(List.of("Setup modern dev environment", "Submit repository or prototype link", "Handle state management"));
+        s10.getChoices().add(new StageChoice("c15a", "Build a feature-complete prototype with resilient state & local persistence", "Exceptional execution! Demonstrates immediate practical craft.", "Autonomous Execution", true));
+        s10.getChoices().add(new StageChoice("c15b", "Focus on component architecture with strict modularity", "Solid architectural foundation. Sets up scale gracefully.", "Modular Architecture", true));
         s10.setLearningOutcome("Built and shipped your first autonomous portfolio artifact.");
         stages.add(s10);
 
@@ -169,8 +170,9 @@ public class RoadmapService {
                 "Elevate your build from amateur to production grade: add API resilience, loading skeletons, and accessible keyboard navigation.",
                 "LOCKED", "Complete Stage 10", 300, false
         );
-        s11.setObjectives(List.of("Connect external data streams", "Audit Lighthouse performance"));
-        s11.getChoices().add(new StageChoice("c16", "Confirm multi-view application deployed live", "Live deployment logged. Exceptional momentum.", "Production Rigor", true));
+        s11.setObjectives(List.of("Connect external data streams", "Audit Lighthouse performance", "Implement robust error boundaries"));
+        s11.getChoices().add(new StageChoice("c16a", "Implement resilient error boundaries, skeleton loaders, and cached API feeds", "Production-grade rigor. Handles chaos and poor network speeds effortlessly.", "Production Resilience", true));
+        s11.getChoices().add(new StageChoice("c16b", "Optimize core Web Vitals and Lighthouse performance to 95+", "Superb optimization discipline. Speed directly converts to user retention.", "Performance Mastery", true));
         s11.setLearningOutcome("Demonstrated intermediate software craft and system resilience.");
         stages.add(s11);
 
@@ -182,8 +184,9 @@ public class RoadmapService {
                 "You have moved from curious spectator to verified creator. Unlocked Chapter 5: Your Next Horizon.",
                 "LOCKED", "Complete Stage 11", 400, true
         );
-        s12.setObjectives(List.of("Publish Flagship Project", "Unlock Chapter 5"));
-        s12.getChoices().add(new StageChoice("c17", "Claim the Master Crafter Crest", "Master Crafter Crest unlocked.", "Mastery", true));
+        s12.setObjectives(List.of("Publish Flagship Project", "Document architectural trade-offs", "Unlock Chapter 5"));
+        s12.getChoices().add(new StageChoice("c17a", "Deploy full-stack flagship project live with custom domain and CI/CD", "Monumental milestone. Verified proof of senior capability.", "Mastery", true));
+        s12.getChoices().add(new StageChoice("c17b", "Publish interactive demo with open-source documentation", "Community-first mindset. Showcases both technical depth and collaboration.", "Open Source Leader", true));
         s12.setLearningOutcome("Unlocked Chapter 5: Your Next Horizon.");
         stages.add(s12);
 
@@ -196,6 +199,10 @@ public class RoadmapService {
                 "Great engineers aren't just coders; they are clear thinkers who articulate architectural trade-offs.",
                 "LOCKED", "Complete Stage 12", 350, false
         );
+        s13.setObjectives(List.of("Draft in-depth technical case study", "Frame architectural decisions with metric impact"));
+        s13.getChoices().add(new StageChoice("c18a", "Structure case study highlighting business impact, challenges overcome, and benchmarks", "Persuasive narrative! Hiring leads prioritize engineers who understand business outcomes.", "Storytelling Craft", true));
+        s13.getChoices().add(new StageChoice("c18b", "Publish deep-dive architectural post on state synchronization and edge cases", "Shows rare technical maturity and willingness to mentor the wider craft.", "Technical Authority", true));
+        s13.setLearningOutcome("Articulated complex technical decisions into clear, high-impact case study narratives.");
         stages.add(s13);
 
         // Stage 14: The Mock Interview Trial
@@ -203,9 +210,13 @@ public class RoadmapService {
                 "stage-14", 14, 5, "Chapter 5: Your Next Horizon",
                 "The Mock Interview Trial", "Simulate behavioral & technical questioning under pressure",
                 "SIMULATION", "theron",
-                "Explain how you resolved a tricky state bug and handled an architectural disagreement.",
+                "Explain how you resolved a tricky state bug and handled an architectural disagreement under deadline pressure.",
                 "LOCKED", "Complete Stage 13", 400, false
         );
+        s14.setObjectives(List.of("Practice STAR method responses", "Navigate system design trade-offs gracefully"));
+        s14.getChoices().add(new StageChoice("c19a", "Detail problem with data, explain root-cause isolation, and show diplomatic alignment", "Master-level interview response. Demonstrates high emotional intelligence and deep technical acumen.", "Executive Poise", true));
+        s14.getChoices().add(new StageChoice("c19b", "Walk through live debugging steps, memory profile findings, and automated regression guards", "Outstanding technical depth. Proves you do not merely fix bugs, you prevent recurrence.", "Deep Diagnostic", true));
+        s14.setLearningOutcome("Mastered the art of high-stakes technical defense and empathetic communication.");
         stages.add(s14);
 
         // Stage 15: The Unwritten Horizon
@@ -213,9 +224,13 @@ public class RoadmapService {
                 "stage-15", 15, 5, "Chapter 5: Your Next Horizon",
                 "The Unwritten Horizon", "Your career has no script — step into the real world",
                 "MILESTONE_CHECKPOINT", "aurelia",
-                "The game map ends here, but your unscripted career has just begun. Keep discovering, experimenting, and growing.",
+                "The game map ends here, but your unscripted career has just begun. Keep discovering, experimenting, and growing without limits.",
                 "LOCKED", "Complete Stage 14", 500, true
         );
+        s15.setObjectives(List.of("Celebrate completion of all 15 roadmap horizons", "Claim the Unscripted Grand Master Crest", "Step boldly into real-world projects"));
+        s15.getChoices().add(new StageChoice("c20a", "Claim the Unscripted Grand Master Crest and embark into the wild", "Congratulations! You have transcended the script. Your real adventure starts today.", "Unscripted Master", true));
+        s15.getChoices().add(new StageChoice("c20b", "Chart a second adjacent horizon in Design or Systems Architecture", "The eternal learner spirit. Polymaths define the cutting edge of modern industries.", "Boundless Polymath", true));
+        s15.setLearningOutcome("Achieved 100% completion of the Unscripted Journey. Ready to author your own trajectory.");
         stages.add(s15);
 
         return stages;
@@ -288,6 +303,7 @@ public class RoadmapService {
         badges.add(new AchievementBadge("b3", "Level 2 Explorer", "Accumulated over 200 XP across discovery stages", "trophy", true, "Just now"));
         badges.add(new AchievementBadge("b4", "Simulation Survivor", "Conquer Chapter 3 Crisis at 9:00 AM", "shield", false, null));
         badges.add(new AchievementBadge("b5", "Master Crafter", "Complete your flagship capstone deliverable", "lily", false, null));
+        badges.add(new AchievementBadge("b6", "Grand Master of Horizons", "Conquered all 15 stages of the Unscripted journey", "star", false, null));
         journey.setAchievements(badges);
 
         journey.setWeeklyGoals(List.of(
@@ -325,7 +341,7 @@ public class RoadmapService {
                     journey.setCurrentChapter(next.getChapterNumber());
                     journey.setAdaptationNote("Victory! " + s.getTitle() + " completed (+" + s.getXpReward() + " XP). Next: Stage " + next.getStageNumber() + " - " + next.getTitle() + ".");
                 } else {
-                    journey.setAdaptationNote("All horizons mastered! You have completed the Unscripted Journey Map.");
+                    journey.setAdaptationNote("All 15 horizons mastered! You have conquered the Unscripted Journey Map.");
                 }
             }
         }
@@ -351,6 +367,12 @@ public class RoadmapService {
         if (completedCount >= 12) {
             journey.getAchievements().stream()
                     .filter(b -> b.getId().equals("b5"))
+                    .findFirst()
+                    .ifPresent(b -> { b.setUnlocked(true); b.setUnlockedAt("Just now"); });
+        }
+        if (completedCount >= 15) {
+            journey.getAchievements().stream()
+                    .filter(b -> b.getId().equals("b6"))
                     .findFirst()
                     .ifPresent(b -> { b.setUnlocked(true); b.setUnlockedAt("Just now"); });
         }

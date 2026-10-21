@@ -14,16 +14,13 @@ import {
   ArrowRight,
   Target,
   Zap,
-  Lightbulb,
   Sparkles,
   DollarSign,
   TrendingUp,
   GraduationCap,
-  Briefcase,
   ExternalLink,
-  Layers,
-  Award,
   BookOpen,
+  Play,
 } from 'lucide-react';
 
 function RealityCheckContent() {
@@ -60,7 +57,7 @@ function RealityCheckContent() {
 
     const activeUser = user || {
       id: 'usr-player-' + Math.random().toString(36).substring(2, 8),
-      name: 'Trailblazer',
+      name: 'Explorer',
     };
     activeUser.selectedCareerId = career.id;
     activeUser.selectedCareerName = career.careerName;
@@ -74,7 +71,11 @@ function RealityCheckContent() {
           careerId: career.id,
         }),
       });
-      confetti({ particleCount: 70, spread: 80 });
+      confetti({
+        particleCount: 80,
+        spread: 80,
+        colors: ['#064E3B', '#10B981', '#D4AF37', '#FAF7F2'],
+      });
       router.push('/journey');
     } catch (err) {
       console.error('Roadmap generation error', err);
@@ -86,10 +87,10 @@ function RealityCheckContent() {
 
   if (loading || !career) {
     return (
-      <div className="min-h-[85vh] flex flex-col items-center justify-center space-y-4 chapter-bg-3">
+      <div className="min-h-[85vh] flex flex-col items-center justify-center space-y-4 bg-[#FAF7F2]">
         <CharacterArt character="theron" size={130} />
-        <p className="font-serif italic font-black text-xl text-[#10B981] animate-pulse">
-          Theron is preparing your Honest O*NET Reality Check...
+        <p className="font-serif italic font-black text-xl text-[#064E3B] animate-pulse">
+          Theron is auditing your empirical O*NET reality check...
         </p>
       </div>
     );
@@ -102,198 +103,226 @@ function RealityCheckContent() {
   const gapList = career.requiredSkills?.filter((req) => !matchedList.includes(req)) || [];
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 chapter-bg-3 pb-24">
-      <div className="max-w-4xl mx-auto space-y-8 animate-pop">
+    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 bg-[#FAF7F2] text-[#062419] pb-24">
+      <div className="max-w-6xl mx-auto space-y-8 animate-pop">
 
-        {/* Big Reality Check Header */}
-        <div className="game-card-3d p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 bg-white">
-          <CharacterArt character="theron" size={110} className="flex-shrink-0" />
-          <div className="space-y-2 text-center sm:text-left flex-1">
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-              <span className="text-xs font-black uppercase tracking-wider text-[#10B981] bg-[#D1FAE5] px-3 py-1 rounded-full">
-                HONEST WORKPLACE REALITY CHECK
-              </span>
-              <span className="text-xs font-black uppercase tracking-wider text-[#7C3AED] bg-[#EDE9FE] px-3 py-1 rounded-full">
-                O*NET {career.onetSocCode || career.id}
-              </span>
+        {/* HERO REALITY HEADER */}
+        <div className="bento-card-emerald p-8 sm:p-10 flex flex-col md:flex-row items-center gap-6 justify-between">
+          <div className="flex items-center gap-6">
+            <CharacterArt character="theron" size={110} className="flex-shrink-0" />
+            <div className="space-y-2 text-center md:text-left">
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+                <span className="text-[11px] font-black uppercase tracking-wider text-[#D4AF37] bg-white/10 px-3 py-1 rounded-full border border-[#D4AF37]/30">
+                  Honest Workplace Reality Check
+                </span>
+                <span className="text-[11px] font-black uppercase tracking-wider text-white bg-white/15 px-3 py-1 rounded-full">
+                  O*NET SOC {career.onetSocCode || career.id}
+                </span>
+              </div>
+              <h1 className="font-serif text-3xl sm:text-5xl font-black text-white leading-tight">
+                {career.careerName}
+              </h1>
+              <p className="text-sm sm:text-base text-[#D1FAE5] font-medium leading-relaxed max-w-2xl">
+                {career.description}
+              </p>
             </div>
-            <h1 className="font-serif text-3xl sm:text-4xl font-black text-[#1E152A]">
-              {career.careerName}
-            </h1>
-            <p className="text-xs sm:text-sm text-[#4A3B63] font-medium leading-relaxed">
-              {career.description}
-            </p>
           </div>
+
+          <button
+            disabled={generatingRoadmap}
+            onClick={handleCommitToRoadmap}
+            className="gold-btn-accent px-8 py-4 rounded-full text-xs uppercase tracking-wider inline-flex items-center gap-2 flex-shrink-0"
+          >
+            <Play className="w-4 h-4 fill-current text-[#022C22]" />
+            <span>{generatingRoadmap ? 'Generating Map...' : 'Lock & Play 15 Stages'}</span>
+          </button>
         </div>
 
-        {/* 1. SOURCED REAL O*NET & US BLS DATA SECTION */}
-        <div className="game-card-3d p-6 sm:p-7 bg-white space-y-5">
-          <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-[#16A34A]" />
-              <h2 className="font-serif text-xl font-black text-[#1E152A]">
-                Official Sourced Career Metrics (O*NET & U.S. BLS)
-              </h2>
+        {/* 4 OFFICIAL EMPIRICAL METRICS BENTO GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <div className="bento-card p-5 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-black text-[#064E3B] uppercase tracking-wider">
+              <DollarSign className="w-4 h-4 text-[#047857]" /> Median Wage (BLS)
             </div>
-            {career.officialOnetUrl && (
-              <a
-                href={career.officialOnetUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-black text-[#7C3AED] hover:underline"
-              >
-                <span>View on O*NET OnLine</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            )}
-          </div>
-
-          {/* 4 Official Stat Badges */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <div className="p-3.5 rounded-2xl bg-[#F0FDF4] border-2 border-[#BBF7D0]">
-              <div className="flex items-center gap-1.5 text-xs font-black text-[#166534] uppercase tracking-wider">
-                <DollarSign className="w-4 h-4 text-[#16A34A]" /> Median Wage
-              </div>
-              <div className="text-lg font-black text-[#14532D] mt-1">
-                {career.medianAnnualWage || '$132,270 / yr'}
-              </div>
-              <div className="text-[10px] text-[#15803D] font-bold">
-                {career.hourlyWage ? `${career.hourlyWage}` : 'Hourly: $63.59'}
-              </div>
+            <div className="text-2xl font-serif font-black text-[#062419]">
+              {career.medianAnnualWage || '$132,270'}
             </div>
-
-            <div className="p-3.5 rounded-2xl bg-[#EFF6FF] border-2 border-[#BFDBFE]">
-              <div className="flex items-center gap-1.5 text-xs font-black text-[#1D4ED8] uppercase tracking-wider">
-                <TrendingUp className="w-4 h-4 text-[#2563EB]" /> Job Growth
-              </div>
-              <div className="text-lg font-black text-[#1E3A8A] mt-1">
-                {career.jobOutlook ? career.jobOutlook.split(' ')[0] : '+25% Growth'}
-              </div>
-              <div className="text-[10px] text-[#2563EB] font-bold">
-                {career.brightOutlook ? '★ Bright Outlook Demand' : 'Steady Vitality'}
-              </div>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-[#FAF5FF] border-2 border-[#E9D5FF]">
-              <div className="flex items-center gap-1.5 text-xs font-black text-[#7C3AED] uppercase tracking-wider">
-                <GraduationCap className="w-4 h-4 text-[#9333EA]" /> Education Level
-              </div>
-              <div className="text-sm font-black text-[#581C87] mt-1 line-clamp-2">
-                {career.educationRequirement ? career.educationRequirement.split('in')[0] : "Bachelor's Degree"}
-              </div>
-              <div className="text-[10px] text-[#7E22CE] font-bold">
-                {career.experienceLevel || 'Job Zone 4: High Prep'}
-              </div>
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-[#FFFBEB] border-2 border-[#FDE68A]">
-              <div className="flex items-center gap-1.5 text-xs font-black text-[#B45309] uppercase tracking-wider">
-                <Sparkles className="w-4 h-4 text-[#D97706]" /> Holland RIASEC
-              </div>
-              <div className="text-lg font-black text-[#78350F] mt-1">
-                {career.riasecCode ? career.riasecCode.split(' ')[0] : 'IRC'}
-              </div>
-              <div className="text-[10px] text-[#92400E] font-bold line-clamp-1">
-                {career.riasecCode ? career.riasecCode : 'Investigative, Realistic'}
-              </div>
+            <div className="text-xs text-[#537566] font-medium">
+              {career.hourlyWage ? `${career.hourlyWage}` : 'Hourly: ~$63.59'}
             </div>
           </div>
 
-          {/* Real O*NET Daily Tasks & Work Activities */}
-          {career.topWorkActivities && career.topWorkActivities.length > 0 && (
-            <div className="space-y-2 pt-2">
-              <span className="text-xs font-black uppercase text-[#1E152A] tracking-wider block">
-                Top Day-to-Day Responsibilities (Official O*NET Work Activities):
+          <div className="bento-card p-5 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-black text-[#064E3B] uppercase tracking-wider">
+              <TrendingUp className="w-4 h-4 text-[#10B981]" /> Projected Growth
+            </div>
+            <div className="text-2xl font-serif font-black text-[#062419]">
+              {career.jobOutlook ? career.jobOutlook.split(' ')[0] : '+25% Growth'}
+            </div>
+            <div className="text-xs text-[#047857] font-bold">
+              {career.brightOutlook ? '★ Bright Outlook High Demand' : 'Steady Industry Vitality'}
+            </div>
+          </div>
+
+          <div className="bento-card p-5 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-black text-[#064E3B] uppercase tracking-wider">
+              <GraduationCap className="w-4 h-4 text-[#047857]" /> Preparation Zone
+            </div>
+            <div className="text-lg font-serif font-black text-[#062419] truncate">
+              {career.educationRequirement ? career.educationRequirement.split('in')[0] : "Bachelor's Degree"}
+            </div>
+            <div className="text-xs text-[#537566] font-medium">
+              {career.experienceLevel || 'Job Zone 4: High Prep'}
+            </div>
+          </div>
+
+          <div className="bento-card p-5 space-y-2">
+            <div className="flex items-center gap-1.5 text-xs font-black text-[#B38A38] uppercase tracking-wider">
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" /> RIASEC Code
+            </div>
+            <div className="text-2xl font-serif font-black text-[#062419]">
+              {career.riasecCode ? career.riasecCode.split(' ')[0] : 'IRC'}
+            </div>
+            <div className="text-xs text-[#537566] font-medium truncate">
+              {career.riasecCode || 'Investigative, Realistic'}
+            </div>
+          </div>
+
+        </div>
+
+        {/* WORKPLACE ACTIVITIES & TECH BENTO GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Daily Work Activities */}
+          <div className="bento-card p-6 sm:p-7 space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="font-serif text-xl font-black text-[#062419]">
+                Core Daily Workplace Activities
+              </h3>
+              <span className="text-[10px] font-black uppercase text-[#064E3B] bg-[#ECFDF5] px-2.5 py-1 rounded-full border border-[#047857]/20">
+                Official O*NET 29.0
               </span>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+            </div>
+
+            {career.topWorkActivities && career.topWorkActivities.length > 0 ? (
+              <ul className="space-y-2.5 text-xs">
                 {career.topWorkActivities.map((act, i) => (
-                  <li key={i} className="p-2.5 rounded-xl bg-gray-50 border border-gray-200 flex items-start gap-2">
-                    <span className="w-4 h-4 rounded-full bg-[#10B981] text-white flex-shrink-0 flex items-center justify-center text-[10px] font-black mt-0.5">
+                  <li key={i} className="p-3 rounded-xl bg-[#FAF7F2] border border-[#E5DDD1] flex items-start gap-2.5">
+                    <span className="w-4 h-4 rounded-full bg-[#064E3B] text-white flex-shrink-0 flex items-center justify-center text-[10px] font-black mt-0.5">
                       ✓
                     </span>
-                    <span className="text-[#374151] font-medium leading-relaxed">{act}</span>
+                    <span className="text-[#244637] font-medium leading-relaxed">{act}</span>
                   </li>
                 ))}
               </ul>
-            </div>
-          )}
+            ) : (
+              <p className="text-xs text-[#537566]">System architecture, user interface components, and cross-functional design sprints.</p>
+            )}
+          </div>
 
-          {/* Tools & Tech */}
-          {career.topToolsAndTech && career.topToolsAndTech.length > 0 && (
-            <div className="space-y-1.5 pt-1">
-              <span className="text-xs font-black uppercase text-[#1E152A] tracking-wider block">
-                Tools & Technologies Retained in O*NET:
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {career.topToolsAndTech.map((tool) => (
-                  <span
-                    key={tool}
-                    className="px-3 py-1.5 rounded-xl bg-[#EDE9FE] border border-[#DDD6FE] text-xs font-black text-[#6D28D9]"
-                  >
-                    {tool}
-                  </span>
-                ))}
+          {/* Tools & Technologies */}
+          <div className="bento-card p-6 sm:p-7 space-y-4 flex flex-col justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="font-serif text-xl font-black text-[#062419]">
+                  Industry Tools & Tech Stack
+                </h3>
+                <span className="text-[10px] font-black uppercase text-[#B38A38] bg-[#F7EEDB] px-2.5 py-1 rounded-full border border-[#C5A880]">
+                  Required Stacks
+                </span>
               </div>
+              <p className="text-xs text-[#537566]">
+                Modern tools reported by surveyed employers for this occupation code:
+              </p>
+
+              {career.topToolsAndTech && career.topToolsAndTech.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {career.topToolsAndTech.map((tool) => (
+                    <span
+                      key={tool}
+                      className="px-3 py-1.5 rounded-xl bg-[#FAF7F2] border border-[#E5DDD1] text-xs font-black text-[#064E3B]"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
-          )}
+
+            {career.officialOnetUrl && (
+              <div className="pt-4 border-t border-[#E5DDD1]">
+                <a
+                  href={career.officialOnetUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-black text-[#064E3B] hover:underline"
+                >
+                  <span>Examine Full Department of Labor Profile</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            )}
+          </div>
+
         </div>
 
-        {/* 2. AI GROWTH COACH & BEGINNER GRIT MENTORSHIP */}
+        {/* BEGINNER FRICTION & SKILLS AUDIT BENTO */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           
-          {/* Beginner Obstacle / The Unvarnished Truth */}
-          <div className="game-card-3d p-6 bg-white space-y-3">
-            <div className="flex items-center gap-2.5 text-[#DC2626]">
-              <AlertTriangle className="w-5 h-5 text-[#EF4444]" />
-              <h3 className="font-serif text-lg font-black text-[#1E152A]">
+          {/* Unvarnished Truth */}
+          <div className="bento-card p-6 sm:p-7 space-y-3">
+            <div className="flex items-center gap-2 text-[#991B1B]">
+              <AlertTriangle className="w-5 h-5 text-[#DC2626]" />
+              <h3 className="font-serif text-xl font-black text-[#062419]">
                 The Beginner Reality & Friction
               </h3>
             </div>
-            <p className="text-xs sm:text-sm text-[#4B5563] leading-relaxed font-medium bg-[#FEF2F2] p-4 rounded-2xl border border-[#FCA5A5]">
+            <p className="text-xs sm:text-sm text-[#244637] leading-relaxed font-medium bg-[#FFF1F2] p-4 rounded-2xl border border-[#FDA4AF]">
               {career.beginnerReality}
             </p>
-            <div className="text-xs text-[#6B7280] space-y-1 pt-1">
-              <span className="font-black text-[#374151] block uppercase text-[10px]">
-                Typical Tuesday in the Life:
+            <div className="text-xs text-[#537566] space-y-1 pt-1">
+              <span className="font-black text-[#062419] block uppercase text-[10px]">
+                Typical Workplace Scenario:
               </span>
-              <p className="italic text-[11px] leading-relaxed">{career.dailyWorkExample}</p>
+              <p className="italic text-xs leading-relaxed">{career.dailyWorkExample}</p>
             </div>
           </div>
 
-          {/* Skills Audit & Gap Analysis */}
-          <div className="game-card-3d p-6 bg-white space-y-3">
-            <div className="flex items-center gap-2.5 text-[#7C3AED]">
-              <Target className="w-5 h-5 text-[#7C3AED]" />
-              <h3 className="font-serif text-lg font-black text-[#1E152A]">
-                Your Skills Audit & Gap Bridge
+          {/* Skills Audit & Gap Bridge */}
+          <div className="bento-card p-6 sm:p-7 space-y-4">
+            <div className="flex items-center gap-2 text-[#064E3B]">
+              <Target className="w-5 h-5 text-[#064E3B]" />
+              <h3 className="font-serif text-xl font-black text-[#062419]">
+                Skills Audit & Gap Analysis
               </h3>
             </div>
 
             <div className="space-y-3 text-xs">
               <div>
-                <span className="text-[10px] font-black uppercase text-[#15803D] tracking-wider block mb-1">
+                <span className="text-[10px] font-black uppercase text-[#064E3B] tracking-wider block mb-1">
                   Skills You Already Possess ({matchedList.length}):
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {matchedList.length > 0 ? (
                     matchedList.map((s) => (
-                      <span key={s} className="px-2.5 py-1 rounded-lg bg-[#DCFCE7] text-[#15803D] font-bold border border-[#86EFAC]">
+                      <span key={s} className="px-2.5 py-1 rounded-lg bg-[#ECFDF5] text-[#064E3B] font-bold border border-[#047857]/30">
                         ✓ {s}
                       </span>
                     ))
                   ) : (
-                    <span className="italic text-gray-400">Open canvas to cultivate foundational skills</span>
+                    <span className="italic text-[#537566]">Foundational skills ready to be forged on the stage map</span>
                   )}
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] font-black uppercase text-[#B45309] tracking-wider block mb-1">
-                  Next Skills to Forge on the Map ({gapList.length}):
+                <span className="text-[10px] font-black uppercase text-[#B38A38] tracking-wider block mb-1">
+                  Next Skills To Forge on Map ({gapList.length}):
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {gapList.slice(0, 4).map((s) => (
-                    <span key={s} className="px-2.5 py-1 rounded-lg bg-[#FEF3C7] text-[#B45309] font-bold border border-[#FDE68A]">
+                    <span key={s} className="px-2.5 py-1 rounded-lg bg-[#F7EEDB] text-[#022C22] font-bold border border-[#C5A880]">
                       ★ {s}
                     </span>
                   ))}
@@ -301,24 +330,25 @@ function RealityCheckContent() {
               </div>
             </div>
           </div>
+
         </div>
 
-        {/* 3. STARTER QUEST CHALLENGES */}
+        {/* 3 STARTER QUEST CHALLENGES */}
         {career.starterTasks && career.starterTasks.length > 0 && (
-          <div className="game-card-3d p-6 bg-white space-y-4">
+          <div className="bento-card p-6 sm:p-7 space-y-4">
             <div className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-[#F59E0B]" />
-              <h3 className="font-serif text-lg font-black text-[#1E152A]">
+              <Zap className="w-5 h-5 text-[#D4AF37]" />
+              <h3 className="font-serif text-xl font-black text-[#062419]">
                 First 3 Practical Proof-of-Competence Deliverables
               </h3>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
               {career.starterTasks.map((task, idx) => (
-                <div key={idx} className="p-3.5 rounded-2xl bg-[#FAF5FF] border-2 border-[#E9D5FF] space-y-1.5">
-                  <span className="w-6 h-6 rounded-full bg-[#7C3AED] text-[#FEF08A] font-black text-xs flex items-center justify-center">
+                <div key={idx} className="p-4 rounded-2xl bg-[#FAF7F2] border border-[#E5DDD1] space-y-2">
+                  <span className="w-7 h-7 rounded-full bg-[#064E3B] text-[#D4AF37] font-black text-xs flex items-center justify-center">
                     {idx + 1}
                   </span>
-                  <p className="font-black text-[#1E152A] leading-snug">{task}</p>
+                  <p className="font-bold text-[#062419] leading-snug">{task}</p>
                 </div>
               ))}
             </div>
@@ -326,10 +356,10 @@ function RealityCheckContent() {
         )}
 
         {/* BOTTOM ACTION BAR */}
-        <div className="game-card-3d p-6 bg-white flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bento-card p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <Link
             href="/results"
-            className="game-btn-secondary px-6 py-3.5 rounded-full text-xs font-black uppercase tracking-wider text-center w-full sm:w-auto"
+            className="px-6 py-3.5 rounded-full text-xs font-black uppercase tracking-wider text-[#537566] hover:text-[#062419] bg-[#FAF7F2] border border-[#E5DDD1] text-center w-full sm:w-auto"
           >
             ← Back to All Horizons
           </Link>
@@ -337,10 +367,10 @@ function RealityCheckContent() {
           <button
             disabled={generatingRoadmap}
             onClick={handleCommitToRoadmap}
-            className="game-btn-primary px-9 py-4 rounded-full text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-3 w-full sm:w-auto animate-pulse"
+            className="emerald-btn-primary px-9 py-4 rounded-full text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-3 w-full sm:w-auto"
           >
-            <span>{generatingRoadmap ? 'Generating 15-Stage Adventure Map...' : 'Lock Horizon & Play Stage Map'}</span>
-            <ArrowRight className="w-5 h-5 text-[#FEF08A]" />
+            <span>{generatingRoadmap ? 'Generating 15-Stage Map...' : 'Commit to Horizon & Launch Stage Map'}</span>
+            <ArrowRight className="w-5 h-5 text-[#D4AF37]" />
           </button>
         </div>
 
@@ -353,8 +383,8 @@ export default function RealityCheckPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center chapter-bg-3">
-          <p className="font-black text-[#10B981] animate-pulse">Loading Reality Check...</p>
+        <div className="min-h-screen flex items-center justify-center bg-[#FAF7F2]">
+          <p className="font-black text-[#064E3B] animate-pulse">Loading Reality Check...</p>
         </div>
       }
     >
