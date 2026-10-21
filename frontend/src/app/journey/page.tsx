@@ -17,12 +17,15 @@ import {
   Compass,
   ArrowRight,
   ShieldCheck,
-  ChevronRight,
   CheckCircle2,
   Lock,
   Layers,
   Award,
   Zap,
+  Plus,
+  GitFork,
+  Calendar,
+  Clock,
 } from 'lucide-react';
 
 export default function JourneyMapPage() {
@@ -30,11 +33,22 @@ export default function JourneyMapPage() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [selectedStage, setSelectedStage] = useState<GameStage | null>(null);
+  const [activeTab, setActiveTab] = useState<'all' | 'phase1' | 'phase2' | 'phase3' | 'phase4'>('all');
+  const [customGoals, setCustomGoals] = useState<string[]>([]);
+  const [newGoalInput, setNewGoalInput] = useState('');
+  const [showAddGoalModal, setShowAddGoalModal] = useState(false);
   const currentStageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const activeUser = getCurrentUser();
     setUser(activeUser);
+
+    const storedGoals = localStorage.getItem('unscripted_custom_goals');
+    if (storedGoals) {
+      try {
+        setCustomGoals(JSON.parse(storedGoals));
+      } catch (e) {}
+    }
 
     const loadJourney = async () => {
       try {
@@ -46,7 +60,7 @@ export default function JourneyMapPage() {
             method: 'POST',
             body: JSON.stringify({
               userId,
-              careerId: activeUser?.selectedCareerId || '15-1252.00',
+              careerId: activeUser?.selectedCareerId || 'car-fe-dev',
             }),
           });
         }
@@ -60,6 +74,16 @@ export default function JourneyMapPage() {
 
     loadJourney();
   }, []);
+
+  const handleAddCustomGoal = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newGoalInput.trim()) return;
+    const updated = [...customGoals, newGoalInput.trim()];
+    setCustomGoals(updated);
+    localStorage.setItem('unscripted_custom_goals', JSON.stringify(updated));
+    setNewGoalInput('');
+    setShowAddGoalModal(false);
+  };
 
   const handleCompleteStage = async (stageId: string, chosenOptionId?: string) => {
     if (!journey) return;
@@ -83,7 +107,7 @@ export default function JourneyMapPage() {
       <div className="min-h-[85vh] w-full flex flex-col items-center justify-center space-y-4 bg-[#FAF7F2]">
         <CharacterArt character="aurelia" size={130} />
         <p className="font-display font-black text-2xl text-[#064E3B] animate-pulse">
-          Calibrating Your 15-Stage Roadmap...
+          Calibrating Your Action Roadmap...
         </p>
       </div>
     );
@@ -101,11 +125,11 @@ export default function JourneyMapPage() {
   const completedStages = stages.filter((s) => s.status === 'COMPLETED');
 
   const chapterMeta = [
-    { num: 1, title: 'Chapter 1: The Unknown', subtitle: 'Self-Discovery & Baseline Calibration', character: 'aurelia' as const },
-    { num: 2, title: 'Chapter 2: The Possibilities', subtitle: 'Horizons & Empirical Reality Checks', character: 'rowan' as const },
-    { num: 3, title: 'Chapter 3: A Day In Their Shoes', subtitle: 'Live Workplace Crisis Simulations', character: 'theron' as const },
-    { num: 4, title: 'Chapter 4: Build Your Path', subtitle: 'Flagship Artifacts & Mini-Challenges', character: 'theron' as const },
-    { num: 5, title: 'Chapter 5: Your Next Horizon', subtitle: 'The Real World Awaits (Unscripted Future)', character: 'aurelia' as const },
+    { num: 1, title: 'Phase 1: Baseline & Core Foundations', subtitle: 'Environment Setup & Fundamental Mental Models', character: 'aurelia' as const },
+    { num: 2, title: 'Phase 2: Architectural Patterns', subtitle: 'Systems Design & Production-Ready Workflows', character: 'rowan' as const },
+    { num: 3, title: 'Phase 3: Crisis Response & Triage', subtitle: 'Live Workplace Simulations & Bug Hunting', character: 'theron' as const },
+    { num: 4, title: 'Phase 4: Capstone Artifact', subtitle: 'Flagship Deliverable with High Visual Proof', character: 'theron' as const },
+    { num: 5, title: 'Phase 5: Launch & Mastery', subtitle: 'Portfolio Deployment & Real-World Readiness', character: 'aurelia' as const },
   ];
 
   return (
@@ -118,7 +142,7 @@ export default function JourneyMapPage() {
           {/* Player Level & XP Indicator */}
           <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="w-13 h-13 rounded-2xl bg-[#064E3B] text-[#D4AF37] flex items-center justify-center font-display font-black text-lg shadow-md border-2 border-[#D4AF37]">
+              <div className="w-12 h-12 rounded-2xl bg-[#064E3B] text-[#D4AF37] flex items-center justify-center font-display font-black text-lg shadow-md border-2 border-[#D4AF37]">
                 LV {journey.playerLevel || 2}
               </div>
               <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
@@ -133,7 +157,7 @@ export default function JourneyMapPage() {
                   {user?.name || 'Explorer'}
                 </span>
                 <span className="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-[#ECFDF5] text-[#064E3B] border border-[#047857]/30">
-                  Chapter {journey.currentChapter || 1} Active
+                  Phase {journey.currentChapter || 1} Active
                 </span>
               </div>
               <div className="flex items-center gap-3 text-xs font-bold text-[#537566] mt-0.5">
@@ -141,18 +165,23 @@ export default function JourneyMapPage() {
                   <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] fill-current" />
                   <span>{journey.playerXp || 225} XP</span>
                 </span>
-                <Link
-                  href={`/reality-check?id=${journey.careerId || '15-1252.00'}`}
-                  className="text-[#047857] hover:underline font-bold"
-                >
-                  • Horizon: {journey.careerName || 'Software Developer'}
-                </Link>
+                <span className="text-[#047857] font-bold">
+                  • Trajectory: {journey.careerName || 'Software Architecture'}
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Streak & Stage Progress Bar */}
+          {/* Streak, Milestones & Add Custom Goal Button */}
           <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto justify-end">
+            <button
+              onClick={() => setShowAddGoalModal(true)}
+              className="px-3.5 py-2 rounded-2xl bg-white border border-[#064E3B]/25 hover:border-[#064E3B] text-xs font-black text-[#064E3B] inline-flex items-center gap-1.5 shadow-xs"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Add Goal</span>
+            </button>
+
             <div className="flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-[#F7EEDB] border border-[#C5A880] text-[#022C22] text-xs font-black shadow-xs">
               <Flame className="w-4 h-4 text-[#D4AF37] fill-current" />
               <span>{journey.currentStreakDays || 3} DAYS STREAK</span>
@@ -160,18 +189,18 @@ export default function JourneyMapPage() {
 
             <div className="flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 text-[#064E3B] text-xs font-black shadow-xs">
               <Trophy className="w-4 h-4 text-[#064E3B]" />
-              <span>{completedStages.length} / 15 STAGES ({journey.overallProgress}%)</span>
+              <span>{completedStages.length} Milestones Conquered ({journey.overallProgress}%)</span>
             </div>
           </div>
 
         </div>
       </div>
 
-      {/* WIDESCREEN 2-COLUMN ARENA LAYOUT */}
+      {/* WIDESCREEN 2-COLUMN LAYOUT */}
       <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 pt-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* LEFT COLUMN: THE WINDING 15-STAGE ROADMAP (7 Cols) */}
+          {/* LEFT COLUMN: THE WINDING ACTION PATH (7 Cols) */}
           <div className="lg:col-span-7 bento-card p-6 sm:p-10 bg-white relative overflow-hidden">
             
             {/* Intro Greeting Header */}
@@ -179,16 +208,37 @@ export default function JourneyMapPage() {
               <CharacterArt character="aurelia" size={90} className="flex-shrink-0" />
               <div className="space-y-1.5 text-center sm:text-left flex-1">
                 <span className="text-[11px] font-black uppercase tracking-wider text-[#064E3B] bg-[#ECFDF5] px-3 py-1 rounded-full border border-[#047857]/20 inline-block">
-                  Aurelia • Celestial Cartographer
+                  Adaptive Action Roadmap
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl font-black text-[#062419]">
-                  The 15-Stage Horizon Map
+                  Mastery Milestones
                 </h2>
                 <p className="text-xs sm:text-sm text-[#537566] font-medium leading-relaxed">
-                  Tap any unlocked stage along the emerald path to enter dilemmas, resolve workplace triage crises, and build verifiable proof of competence.
+                  Progress through real developmental horizons. Tackle workplace dilemmas, resolve simulated crisis incidents, and build high-conviction proof of competence.
                 </p>
               </div>
             </div>
+
+            {/* Custom Student Goals Banner if present */}
+            {customGoals.length > 0 && (
+              <div className="mb-8 p-5 rounded-2xl bg-[#FAF7F2] border border-[#D4AF37]/40 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase tracking-wider text-[#064E3B] flex items-center gap-1.5">
+                    <Star className="w-3.5 h-3.5 text-[#D4AF37] fill-current" />
+                    <span>Your Personalized Learning Goals</span>
+                  </span>
+                  <span className="text-[10px] font-bold text-[#537566]">{customGoals.length} Active</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {customGoals.map((g, idx) => (
+                    <span key={idx} className="px-3 py-1.5 rounded-xl bg-white border border-[#E5DDD1] text-xs font-bold text-[#062419] flex items-center gap-1.5 shadow-xs">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
+                      {g}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* The Winding Path Canvas */}
             <div className="relative w-full max-w-lg mx-auto py-10" style={{ minHeight: `${mapHeight}px` }}>
@@ -209,7 +259,7 @@ export default function JourneyMapPage() {
                           <div className="flex items-center justify-center gap-2 mb-1">
                             <CharacterArt character={meta.character} size={36} className="w-7 h-7" />
                             <span className="text-[11px] font-black uppercase tracking-wider text-[#064E3B]">
-                              Region {stage.chapterNumber}
+                              Phase {stage.chapterNumber}
                             </span>
                           </div>
                           <h4 className="font-display font-black text-base text-[#062419]">
@@ -255,7 +305,7 @@ export default function JourneyMapPage() {
 
                 <div>
                   <span className="text-xs font-black uppercase tracking-widest text-[#D4AF37] block">
-                    {currentPlayableStage.chapterTitle} • Level {currentPlayableStage.stageNumber}
+                    {currentPlayableStage.chapterTitle} • Milestone {currentPlayableStage.stageNumber}
                   </span>
                   <h3 className="font-display text-2xl font-black text-white mt-1">
                     {currentPlayableStage.title}
@@ -292,23 +342,23 @@ export default function JourneyMapPage() {
 
                 <button
                   onClick={() => setSelectedStage(currentPlayableStage)}
-                  className="gold-btn-accent w-full py-4 px-6 rounded-2xl text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg"
+                  className="gold-btn-accent w-full py-4 px-6 rounded-2xl text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-lg cursor-pointer"
                 >
                   <Play className="w-4 h-4 fill-current text-[#022C22]" />
-                  <span>Launch Level {currentPlayableStage.stageNumber} Challenge</span>
+                  <span>Launch Milestone {currentPlayableStage.stageNumber} Challenge</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             )}
 
-            {/* 5-Chapter Overview Tracker */}
+            {/* Chapter Phases Overview Tracker */}
             <div className="bento-card p-6 sm:p-7 bg-white space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5DDD1]">
                 <h4 className="font-display font-black text-lg text-[#062419]">
-                  Chapter Biomes Tracker
+                  Phase Mastery Horizons
                 </h4>
                 <span className="text-xs font-mono font-bold text-[#064E3B]">
-                  {stages.length} Total Stages
+                  {stages.length} Milestones
                 </span>
               </div>
 
@@ -327,18 +377,20 @@ export default function JourneyMapPage() {
                           : 'bg-[#FAF7F2] border-[#E5DDD1]'
                       }`}
                     >
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-display font-black text-xs text-[#062419]">
+                      <div className="flex items-center justify-between text-xs font-bold mb-1">
+                        <span className={isCurrentChapter ? 'text-[#064E3B] font-black' : 'text-[#537566]'}>
                           {ch.title}
                         </span>
-                        <span className="text-[10px] font-bold text-[#064E3B]">
+                        <span className="font-mono text-[11px] text-[#047857]">
                           {chCompleted} / {chStages.length} Done
                         </span>
                       </div>
-                      <div className="w-full bg-[#E5DDD1] h-2 rounded-full overflow-hidden">
+                      <div className="w-full h-1.5 bg-[#E5DDD1] rounded-full overflow-hidden">
                         <div
-                          className="bg-[#064E3B] h-full rounded-full transition-all duration-500"
-                          style={{ width: `${(chCompleted / chStages.length) * 100}%` }}
+                          className="h-full bg-[#064E3B] rounded-full transition-all"
+                          style={{
+                            width: `${chStages.length ? (chCompleted / chStages.length) * 100 : 0}%`,
+                          }}
                         />
                       </div>
                     </div>
@@ -347,21 +399,21 @@ export default function JourneyMapPage() {
               </div>
             </div>
 
-            {/* Quick Actions */}
-            <div className="bento-card p-6 bg-white space-y-3">
-              <h4 className="font-display font-black text-base text-[#062419]">
-                Career Reality Sourcing
-              </h4>
-              <p className="text-xs text-[#537566] leading-relaxed">
-                Stage map calibrated for <span className="font-bold text-[#064E3B]">{journey.careerName}</span>.
-                All tasks ground directly into O*NET SOC {journey.careerId || '15-1252.00'}.
-              </p>
+            {/* Quick Links */}
+            <div className="p-5 rounded-3xl bg-[#FAF7F2] border border-[#E5DDD1] flex items-center justify-between">
               <Link
-                href={`/reality-check?id=${journey.careerId || '15-1252.00'}`}
-                className="w-full py-3 px-4 rounded-xl bg-[#FAF7F2] border border-[#E5DDD1] hover:border-[#064E3B] text-xs font-black text-[#064E3B] inline-flex items-center justify-center gap-1.5 transition-all"
+                href="/forks"
+                className="text-xs font-black uppercase text-[#064E3B] hover:underline flex items-center gap-1.5"
               >
-                <span>Inspect Sourced BLS Reality Report</span>
-                <ChevronRight className="w-4 h-4" />
+                <GitFork className="w-4 h-4 text-[#047857]" />
+                <span>Simulate Decision Forks</span>
+              </Link>
+              <Link
+                href="/dashboard"
+                className="text-xs font-black uppercase text-[#064E3B] hover:underline flex items-center gap-1.5"
+              >
+                <span>Command Deck</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
@@ -370,12 +422,53 @@ export default function JourneyMapPage() {
         </div>
       </div>
 
-      {/* PLAYABLE STAGE MODAL */}
-      <StageModal
-        stage={selectedStage}
-        onClose={() => setSelectedStage(null)}
-        onCompleteStage={handleCompleteStage}
-      />
+      {/* Stage Interactive Modal */}
+      {selectedStage && (
+        <StageModal
+          stage={selectedStage}
+          onClose={() => setSelectedStage(null)}
+          onCompleteStage={handleCompleteStage}
+        />
+      )}
+
+      {/* Add Custom Goal Modal */}
+      {showAddGoalModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-pop">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 border border-[#E5DDD1] shadow-2xl space-y-4">
+            <h3 className="font-display font-black text-xl text-[#062419]">
+              Add a Personalized Milestone Goal
+            </h3>
+            <p className="text-xs text-[#537566]">
+              Add a real project deliverable or learning objective to customize your personal roadmap.
+            </p>
+            <form onSubmit={handleAddCustomGoal} className="space-y-4">
+              <input
+                type="text"
+                value={newGoalInput}
+                onChange={(e) => setNewGoalInput(e.target.value)}
+                placeholder="e.g. Build an authenticated API with database index testing"
+                className="w-full px-4 py-3 rounded-2xl bg-[#FAF7F2] border border-[#E5DDD1] text-xs font-medium text-[#062419] focus:outline-none focus:border-[#064E3B]"
+                autoFocus
+              />
+              <div className="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowAddGoalModal(false)}
+                  className="px-5 py-2.5 rounded-full text-xs font-bold text-[#537566] hover:bg-[#F2ECE1]"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="emerald-btn-primary px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider"
+                >
+                  Save Milestone
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
     </div>
   );

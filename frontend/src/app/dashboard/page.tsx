@@ -14,25 +14,29 @@ import {
   Award,
   Trophy,
   CheckCircle2,
-  BookOpen,
-  MapPin,
   Bookmark,
   Play,
   Star,
   ShieldCheck,
-  DollarSign,
-  TrendingUp,
+  GitFork,
+  Map,
 } from 'lucide-react';
 
 export default function PlayerGuildDashboardPage() {
   const router = useRouter();
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [user, setUser] = useState<any>(null);
+  const [savedForks, setSavedForks] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const activeUser = getCurrentUser();
     setUser(activeUser);
+
+    try {
+      const forks = localStorage.getItem('unscripted_saved_forks');
+      if (forks) setSavedForks(JSON.parse(forks));
+    } catch (e) {}
 
     const loadDashboard = async () => {
       try {
@@ -40,7 +44,7 @@ export default function PlayerGuildDashboardPage() {
         const res = await fetchJson<DashboardSummary>(`/dashboard/${userId}`);
         setSummary(res);
       } catch (err) {
-        console.error('Failed to load player guild dashboard', err);
+        console.error('Failed to load player dashboard', err);
       } finally {
         setLoading(false);
       }
@@ -78,7 +82,7 @@ export default function PlayerGuildDashboardPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-xs font-black uppercase tracking-widest text-[#D4AF37] border border-[#D4AF37]/30">
-                  Command Deck • Guild Active
+                  Student Command Deck
                 </span>
                 <span className="font-mono text-xs font-bold text-[#D1FAE5]">Level {journey?.playerLevel || 2} Explorer</span>
               </div>
@@ -88,21 +92,21 @@ export default function PlayerGuildDashboardPage() {
               </h1>
 
               <p className="text-sm sm:text-base text-[#D1FAE5] font-medium leading-relaxed max-w-xl">
-                Active Horizon: <span className="font-bold text-white">{journey?.careerName || 'Software Developer'}</span>. Advancing through Chapter {journey?.currentChapter || 1}: The Unknown.
+                Active Trajectory: <span className="font-bold text-white">{journey?.careerName || 'Software Architecture'}</span>. Conquering Phase {journey?.currentChapter || 1} Foundations.
               </p>
             </div>
 
             <div className="mt-8 pt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-white/15">
               <div className="flex items-center gap-2 text-xs font-bold text-[#FAF7F2]">
                 <Star className="w-4 h-4 text-[#D4AF37] fill-current" />
-                <span>{journey?.playerXp || 225} Total XP • {completedStages.length}/15 Stages Mastered ({journey?.overallProgress || 20}%)</span>
+                <span>{journey?.playerXp || 225} Total XP • {completedStages.length} Milestones Mastered ({journey?.overallProgress || 20}%)</span>
               </div>
               <Link
                 href="/journey"
                 className="gold-btn-accent px-7 py-3.5 rounded-full text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2"
               >
                 <Play className="w-4 h-4 fill-current text-[#022C22]" />
-                <span>Resume Stage Map</span>
+                <span>Resume Action Roadmap</span>
               </Link>
             </div>
           </div>
@@ -132,65 +136,67 @@ export default function PlayerGuildDashboardPage() {
                 <Flame className="w-6 h-6 text-[#D4AF37] fill-current animate-bounce-slow" />
               </div>
               <span className="text-[10px] uppercase font-black tracking-wider text-[#537566] block">
-                Curiosity Streak
+                Active Streak
               </span>
               <h3 className="font-display text-4xl font-black text-[#062419]">
                 {journey?.currentStreakDays || 3} <span className="text-base font-sans font-bold text-[#537566]">Days</span>
               </h3>
             </div>
             <div className="pt-3 border-t border-[#E5DDD1] text-xs font-bold text-[#B38A38]">
-              Daily Habit Multiplier Active
+              Daily Momentum Active
             </div>
           </div>
 
-          {/* BENTO STAT: STAGES MASTERED */}
+          {/* BENTO STAT: MILESTONES CONQUERED */}
           <div className="bento-card p-7 flex flex-col justify-between bg-white">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-[#ECFDF5] border border-[#047857]/30 flex items-center justify-center text-[#064E3B]">
                 <CheckCircle2 className="w-6 h-6 text-[#10B981]" />
               </div>
               <span className="text-[10px] uppercase font-black tracking-wider text-[#537566] block">
-                Stages Conquered
+                Milestones Conquered
               </span>
               <h3 className="font-display text-4xl font-black text-[#062419]">
-                {completedStages.length} <span className="text-base font-sans font-bold text-[#537566]">/ 15</span>
+                {completedStages.length} <span className="text-base font-sans font-bold text-[#537566]">Completed</span>
               </h3>
             </div>
             <div className="pt-3 border-t border-[#E5DDD1] text-xs font-bold text-[#047857]">
-              {journey?.overallProgress || 20}% of Stage Map
+              {journey?.overallProgress || 20}% of Core Horizons
             </div>
           </div>
 
-          {/* BENTO ITEM: ACTIVE QUEST HORIZON (2 or 3 cols) */}
+          {/* BENTO ITEM: ACTIVE MISSION CARD */}
           <div className="md:col-span-2 lg:col-span-3 bento-card-ivory p-8 flex flex-col justify-between">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#064E3B]" />
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#064E3B]">
-                    O*NET SOC {journey?.careerId || '15-1252.00'} • Active Quest
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#064E3B]">
+                    Active Trajectory
                   </span>
                 </div>
                 <h3 className="font-display text-2xl sm:text-3xl font-black text-[#062419] mt-1">
-                  {journey?.careerName || 'Software Developer (Frontend & Full-Stack)'}
+                  {journey?.careerName || 'Full-Stack Software Architecture'}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#537566] font-medium mt-1">
-                  Active objective: {activeStage ? activeStage.title : 'Stage 3: The Mirror of Baseline'}.
+                  Active objective: {activeStage ? activeStage.title : 'Milestone: The Mirror of Baseline'}.
                 </p>
               </div>
 
               <div className="flex items-center gap-3">
                 <Link
-                  href={`/reality-check?id=${journey?.careerId || '15-1252.00'}`}
-                  className="px-5 py-3 rounded-full bg-white border border-[#E5DDD1] hover:border-[#064E3B] text-xs font-black uppercase tracking-wider text-[#062419]"
+                  href="/forks"
+                  className="px-5 py-3 rounded-full bg-white border border-[#E5DDD1] hover:border-[#064E3B] text-xs font-black uppercase tracking-wider text-[#062419] inline-flex items-center gap-1.5"
                 >
-                  Reality Check
+                  <GitFork className="w-3.5 h-3.5 text-[#047857]" />
+                  <span>Simulate Forks</span>
                 </Link>
                 <Link
                   href="/journey"
-                  className="emerald-btn-primary px-7 py-3 rounded-full text-xs font-black uppercase tracking-wider"
+                  className="emerald-btn-primary px-7 py-3 rounded-full text-xs font-black uppercase tracking-wider inline-flex items-center gap-1.5"
                 >
-                  Play Stage
+                  <Map className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  <span>Open Roadmap</span>
                 </Link>
               </div>
             </div>
@@ -198,26 +204,26 @@ export default function PlayerGuildDashboardPage() {
 
         </div>
 
-        {/* SAVED HORIZONS DRAWER - WIDESCREEN */}
+        {/* SAVED HORIZONS DRAWER */}
         {savedCareers.length > 0 && (
           <div className="bento-card p-7 sm:p-9 bg-white space-y-5">
             <div className="flex items-center gap-2.5">
               <Bookmark className="w-5 h-5 text-[#064E3B]" />
               <h3 className="font-display text-2xl font-black text-[#062419]">
-                Saved Horizons in Guild Archive ({savedCareers.length})
+                Saved Career Horizons ({savedCareers.length})
               </h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
               {savedCareers.map((c) => (
                 <div key={c.id} className="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E5DDD1] space-y-2.5">
-                  <span className="text-[10px] font-mono font-bold uppercase text-[#064E3B]">
-                    O*NET {c.onetSocCode || c.id}
+                  <span className="text-[10px] font-bold uppercase text-[#064E3B]">
+                    {c.domain || 'Technology'}
                   </span>
                   <h4 className="font-display text-lg font-black text-[#062419] leading-snug">
                     {c.careerName}
                   </h4>
                   <div className="flex items-center justify-between text-xs pt-2 border-t border-[#E5DDD1]">
-                    <span className="font-bold text-[#047857]">{c.medianAnnualWage || '$95,000/yr'}</span>
+                    <span className="font-bold text-[#047857]">{c.medianAnnualWage || '$115,000 / yr'}</span>
                     <Link
                       href={`/reality-check?id=${c.id}`}
                       className="text-[#064E3B] font-black hover:underline text-xs"
@@ -231,17 +237,37 @@ export default function PlayerGuildDashboardPage() {
           </div>
         )}
 
-        {/* GUILD TROPHY CABINET (6 BADGES) - WIDESCREEN */}
+        {/* SAVED FORKS SCENARIOS */}
+        {savedForks.length > 0 && (
+          <div className="bento-card p-7 sm:p-9 bg-white space-y-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <GitFork className="w-5 h-5 text-[#064E3B]" />
+                <h3 className="font-display text-2xl font-black text-[#062419]">
+                  Saved Decision Scenarios ({savedForks.length})
+                </h3>
+              </div>
+              <Link href="/forks" className="text-xs font-black uppercase text-[#064E3B] hover:underline">
+                Explore All Forks →
+              </Link>
+            </div>
+            <p className="text-xs text-[#537566]">
+              Compare trade-offs and review 48-hour de-risking test results before committing.
+            </p>
+          </div>
+        )}
+
+        {/* GUILD TROPHY CABINET */}
         <div className="bento-card p-8 sm:p-10 bg-white space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Award className="w-6 h-6 text-[#D4AF37]" />
               <div>
                 <h3 className="font-display text-2xl font-black text-[#062419]">
-                  Guild Trophy Cabinet
+                  Mastery Badges
                 </h3>
                 <span className="text-xs font-bold text-[#537566]">
-                  Milestone badges unlocked through stage progression
+                  Milestones and accomplishments unlocked through your roadmap
                 </span>
               </div>
             </div>
@@ -253,7 +279,7 @@ export default function PlayerGuildDashboardPage() {
                 key={badge.id}
                 className={`p-5 rounded-2xl border text-center space-y-2.5 transition-all ${
                   badge.unlocked
-                    ? 'bg-[#F7EEDB] border-[#D4AF37] shadow-sm scale-104'
+                    ? 'bg-[#F7EEDB] border-[#D4AF37] shadow-sm scale-105'
                     : 'bg-[#FAF7F2] border-[#E5DDD1] opacity-50 grayscale'
                 }`}
               >

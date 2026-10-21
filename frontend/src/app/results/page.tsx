@@ -20,6 +20,8 @@ import {
   TrendingUp,
   Compass,
   Play,
+  GitFork,
+  Map,
 } from 'lucide-react';
 
 export default function ResultsPage() {
@@ -125,7 +127,7 @@ export default function ResultsPage() {
       <div className="min-h-[85vh] w-full flex flex-col items-center justify-center space-y-4 bg-[#FAF7F2]">
         <CharacterArt character="rowan" size={130} />
         <p className="font-display font-black text-2xl text-[#064E3B] animate-pulse">
-          Rowan is mapping your empirical O*NET horizons...
+          Rowan is synthesizing your career trajectories...
         </p>
       </div>
     );
@@ -142,30 +144,37 @@ export default function ResultsPage() {
             <div className="space-y-2 text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 border border-[#D4AF37]/30 text-xs font-black text-[#D4AF37]">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#10B981]" />
-                <span>OFFICIAL O*NET 29.0 & U.S. BLS EMPIRICAL DATA</span>
+                <span>PERSONALIZED COMPASS RESULTS</span>
               </div>
               <h1 className="font-display text-3xl sm:text-5xl font-black text-white leading-tight">
-                Discovered Horizons
+                Discovered Career Horizons
               </h1>
               <p className="text-sm sm:text-base text-[#D1FAE5] font-medium max-w-2xl leading-relaxed">
-                Matched to your curiosity patterns and validated against official Department of Labor statistics.
-                Select any horizon to inspect its honest workplace reality or lock it onto your 15-stage journey map.
+                Matched to your instinctive problem-solving reflexes and validated against verified industry benchmarks.
+                Inspect each horizon's daily reality, simulate decision forks, or lock it into your action roadmap.
               </p>
             </div>
           </div>
 
-          <div className="flex-shrink-0">
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <Link
+              href="/forks"
+              className="px-6 py-4 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 transition-all"
+            >
+              <GitFork className="w-4 h-4 text-[#D4AF37]" />
+              <span>Simulate Forks</span>
+            </Link>
             <Link
               href="/journey"
               className="gold-btn-accent px-8 py-4 rounded-full text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-md"
             >
-              <Play className="w-4 h-4 fill-current text-[#022C22]" />
-              <span>15-Stage Map</span>
+              <Map className="w-4 h-4 text-[#022C22]" />
+              <span>Action Roadmap</span>
             </Link>
           </div>
         </div>
 
-        {/* CAREER HORIZONS BENTO GRID - WIDESCREEN 3-COLUMN ON LARGE SCREENS */}
+        {/* CAREER HORIZONS BENTO GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {careers.map((career, idx) => {
             const isTopMatch = idx === 0;
@@ -182,12 +191,12 @@ export default function ResultsPage() {
                 {/* Top Badge Banner */}
                 <div className="flex items-center justify-between gap-2 pb-3.5 border-b border-[#E5DDD1]">
                   <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-1 rounded-full bg-[#ECFDF5] border border-[#047857]/30 text-[10px] font-mono font-bold text-[#064E3B]">
-                      SOC {career.onetSocCode || career.id}
+                    <span className="px-2.5 py-1 rounded-full bg-[#ECFDF5] border border-[#047857]/30 text-[10px] font-bold text-[#064E3B]">
+                      {career.domain || 'Technology'}
                     </span>
                     {career.brightOutlook && (
                       <span className="px-2.5 py-1 rounded-full bg-[#F7EEDB] border border-[#C5A880] text-[10px] font-bold text-[#022C22] flex items-center gap-1">
-                        <TrendingUp className="w-3 h-3 text-[#064E3B]" /> Bright Outlook
+                        <TrendingUp className="w-3 h-3 text-[#064E3B]" /> Fast Growing
                       </span>
                     )}
                   </div>
@@ -195,16 +204,16 @@ export default function ResultsPage() {
                   <div className="flex items-center gap-2">
                     <span className="px-3 py-1 rounded-full bg-[#ECFDF5] border border-[#047857]/30 text-xs font-black text-[#064E3B] flex items-center gap-1">
                       <Star className="w-3.5 h-3.5 fill-current text-[#D4AF37]" />
-                      {Math.round(career.matchScore)}%
+                      {Math.round(career.matchScore)}% Match
                     </span>
                     <button
                       onClick={() => handleToggleSave(career)}
-                      className={`p-2 rounded-full border transition-all ${
+                      className={`p-2 rounded-full border transition-all cursor-pointer ${
                         isSaved
                           ? 'bg-[#FEE2E2] text-[#DC2626] border-[#FCA5A5]'
                           : 'bg-[#FAF7F2] text-[#537566] hover:bg-[#E5DDD1]/50 border-[#E5DDD1]'
                       }`}
-                      title={isSaved ? 'Saved to Guild' : 'Save Career'}
+                      title={isSaved ? 'Saved to Profile' : 'Save Career'}
                     >
                       {isSaved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
                     </button>
@@ -214,10 +223,7 @@ export default function ResultsPage() {
                 {/* Career Title & Summary */}
                 <div className="py-4 space-y-3.5">
                   <div>
-                    <span className="text-[10px] font-black uppercase text-[#064E3B] tracking-wider block">
-                      {career.domain} • RIASEC: {career.riasecCode ? career.riasecCode.split(' ')[0] : 'Match'}
-                    </span>
-                    <h2 className="font-display text-2xl font-black text-[#062419] mt-1">
+                    <h2 className="font-display text-2xl font-black text-[#062419]">
                       {career.careerName}
                     </h2>
                   </div>
@@ -231,14 +237,14 @@ export default function ResultsPage() {
                     <div className="p-3 rounded-2xl bg-[#ECFDF5] border border-[#047857]/20 flex items-center gap-2">
                       <DollarSign className="w-4 h-4 text-[#064E3B] flex-shrink-0" />
                       <div>
-                        <span className="text-[10px] uppercase font-bold text-[#537566] block">Median Wage (BLS)</span>
-                        <span className="font-display font-black text-[#064E3B] text-sm">{career.medianAnnualWage || '$98,000 / yr'}</span>
+                        <span className="text-[10px] uppercase font-bold text-[#537566] block">Expected Annual</span>
+                        <span className="font-display font-black text-[#064E3B] text-sm">{career.medianAnnualWage || '$112,000 / yr'}</span>
                       </div>
                     </div>
                     <div className="p-3 rounded-2xl bg-[#F7EEDB] border border-[#C5A880] flex items-center gap-2">
                       <TrendingUp className="w-4 h-4 text-[#022C22] flex-shrink-0" />
                       <div>
-                        <span className="text-[10px] uppercase font-bold text-[#537566] block">Projected Growth</span>
+                        <span className="text-[10px] uppercase font-bold text-[#537566] block">Expansion</span>
                         <span className="font-display font-black text-[#022C22] text-sm">{career.jobOutlook ? career.jobOutlook.split(' ')[0] : '+15%'}</span>
                       </div>
                     </div>
@@ -258,7 +264,7 @@ export default function ResultsPage() {
                   {/* Skills Pills */}
                   <div className="space-y-1.5 pt-1">
                     <span className="text-[10px] font-black uppercase text-[#537566] tracking-wider block">
-                      Core O*NET Skills:
+                      Target Core Capabilities:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {career.requiredSkills?.slice(0, 4).map((skill) => (
@@ -285,9 +291,9 @@ export default function ResultsPage() {
                   <button
                     disabled={isLocking}
                     onClick={() => handleLockHorizon(career)}
-                    className="emerald-btn-primary py-3 px-5 rounded-full text-xs font-black uppercase tracking-wider text-center flex-1 inline-flex items-center justify-center gap-1.5"
+                    className="emerald-btn-primary py-3 px-5 rounded-full text-xs font-black uppercase tracking-wider text-center flex-1 inline-flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    <span>{isLocking ? 'Locking...' : 'Lock & Play Map'}</span>
+                    <span>{isLocking ? 'Locking...' : 'Lock on Roadmap'}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
                   </button>
                 </div>
@@ -303,7 +309,7 @@ export default function ResultsPage() {
             className="inline-flex items-center gap-2 text-xs font-black text-[#064E3B] hover:underline uppercase tracking-wider"
           >
             <Compass className="w-4 h-4" />
-            <span>Retake The Trial of Horizons</span>
+            <span>Retake Discovery Quest</span>
           </Link>
         </div>
 

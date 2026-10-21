@@ -18,17 +18,16 @@ import {
   DollarSign,
   TrendingUp,
   GraduationCap,
-  ExternalLink,
-  BookOpen,
   Play,
   Layers,
   Clock,
+  GitFork,
 } from 'lucide-react';
 
 function RealityCheckContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const careerId = searchParams.get('id') || '15-1252.00';
+  const careerId = searchParams.get('id') || 'car-fe-dev';
 
   const [career, setCareer] = useState<CareerResult | null>(null);
   const [user, setUser] = useState<any>(null);
@@ -92,7 +91,7 @@ function RealityCheckContent() {
       <div className="min-h-[85vh] w-full flex flex-col items-center justify-center space-y-4 bg-[#FAF7F2]">
         <CharacterArt character="theron" size={130} />
         <p className="font-display font-black text-2xl text-[#064E3B] animate-pulse">
-          Theron is auditing your empirical O*NET reality check...
+          Theron is auditing your empirical reality check...
         </p>
       </div>
     );
@@ -115,10 +114,10 @@ function RealityCheckContent() {
             <div className="space-y-2.5">
               <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
                 <span className="text-[11px] font-black uppercase tracking-wider text-[#D4AF37] bg-white/15 px-3.5 py-1 rounded-full border border-[#D4AF37]/30">
-                  Official O*NET 29.0 & BLS Audit
+                  Verified Industry Benchmark
                 </span>
                 <span className="text-[11px] font-mono font-bold text-white bg-white/10 px-3 py-1 rounded-full">
-                  SOC {career.onetSocCode || career.id}
+                  {career.domain || 'Technology'}
                 </span>
                 {career.brightOutlook && (
                   <span className="text-[11px] font-bold text-[#10B981] bg-[#10B981]/15 px-3 py-1 rounded-full border border-[#10B981]/30">
@@ -135,85 +134,94 @@ function RealityCheckContent() {
             </div>
           </div>
 
-          <button
-            disabled={generatingRoadmap}
-            onClick={handleCommitToRoadmap}
-            className="gold-btn-accent px-9 py-5 rounded-full text-xs uppercase tracking-wider inline-flex items-center gap-2.5 flex-shrink-0 shadow-lg"
-          >
-            <Play className="w-4 h-4 fill-current text-[#022C22]" />
-            <span>{generatingRoadmap ? 'Generating Map...' : 'Lock & Play 15 Stages'}</span>
-          </button>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <Link
+              href="/forks"
+              className="px-6 py-4 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-black uppercase tracking-wider inline-flex items-center gap-2 transition-all"
+            >
+              <GitFork className="w-4 h-4 text-[#D4AF37]" />
+              <span>Simulate Forks</span>
+            </Link>
+            <button
+              disabled={generatingRoadmap}
+              onClick={handleCommitToRoadmap}
+              className="gold-btn-accent px-8 py-4 rounded-full text-xs uppercase tracking-wider inline-flex items-center gap-2.5 shadow-lg cursor-pointer"
+            >
+              <Play className="w-4 h-4 fill-current text-[#022C22]" />
+              <span>{generatingRoadmap ? 'Generating Roadmap...' : 'Commit to Action Roadmap'}</span>
+            </button>
+          </div>
         </div>
 
-        {/* 4 OFFICIAL EMPIRICAL METRICS - WIDESCREEN BENTO */}
+        {/* 4 OFFICIAL EMPIRICAL METRICS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           
           <div className="bento-card p-6 space-y-2.5 bg-white">
             <div className="flex items-center gap-2 text-xs font-black text-[#064E3B] uppercase tracking-wider">
-              <DollarSign className="w-4 h-4 text-[#047857]" /> Median Annual Wage (BLS)
+              <DollarSign className="w-4 h-4 text-[#047857]" /> Median Annual Compensation
             </div>
             <div className="text-3xl font-display font-black text-[#062419]">
               {career.medianAnnualWage || '$132,270'}
             </div>
             <div className="text-xs text-[#537566] font-medium">
-              {career.hourlyWage ? `Average ${career.hourlyWage}` : 'Hourly: ~$63.59'}
+              {career.hourlyWage ? `Average ${career.hourlyWage}` : 'Estimated hourly: ~$63.50'}
             </div>
           </div>
 
           <div className="bento-card p-6 space-y-2.5 bg-white">
             <div className="flex items-center gap-2 text-xs font-black text-[#064E3B] uppercase tracking-wider">
-              <TrendingUp className="w-4 h-4 text-[#10B981]" /> 10-Year Growth Rate
+              <TrendingUp className="w-4 h-4 text-[#10B981]" /> 10-Year Expansion Rate
             </div>
             <div className="text-3xl font-display font-black text-[#062419]">
               {career.jobOutlook ? career.jobOutlook.split(' ')[0] : '+25%'}
             </div>
             <div className="text-xs text-[#047857] font-bold">
-              {career.brightOutlook ? 'Much faster than average growth' : 'Steady industry employment'}
+              {career.brightOutlook ? 'Faster than industry average' : 'Consistent long-term demand'}
             </div>
           </div>
 
           <div className="bento-card p-6 space-y-2.5 bg-white">
             <div className="flex items-center gap-2 text-xs font-black text-[#064E3B] uppercase tracking-wider">
-              <GraduationCap className="w-4 h-4 text-[#047857]" /> Education & Preparation
+              <GraduationCap className="w-4 h-4 text-[#047857]" /> Typical Qualification
             </div>
             <div className="text-xl font-display font-black text-[#062419] truncate">
-              {career.educationRequirement ? career.educationRequirement.split('in')[0] : "Bachelor's Degree"}
+              {career.educationRequirement ? career.educationRequirement.split('in')[0] : "Bachelor's or Equivalent Portfolio"}
             </div>
             <div className="text-xs text-[#537566] font-medium">
-              {career.experienceLevel || 'Job Zone 4: High Preparation'}
+              High practical capability required
             </div>
           </div>
 
           <div className="bento-card p-6 space-y-2.5 bg-white">
             <div className="flex items-center gap-2 text-xs font-black text-[#B38A38] uppercase tracking-wider">
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" /> Holland RIASEC Profile
+              <Sparkles className="w-4 h-4 text-[#D4AF37]" /> Core Instinct Profile
             </div>
             <div className="text-3xl font-display font-black text-[#062419]">
-              {career.riasecCode ? career.riasecCode.split(' ')[0] : 'IRC'}
+              {career.riasecCode ? career.riasecCode.split(' ')[0] : 'Investigative'}
             </div>
             <div className="text-xs text-[#537566] font-medium truncate">
-              {career.riasecCode || 'Investigative, Realistic'}
+              Analytical & Problem Solving
             </div>
           </div>
 
         </div>
 
-        {/* WORKPLACE ACTIVITIES & TECH STACK - WIDE 2-COLUMN */}
+        {/* WORKPLACE ACTIVITIES & TECH STACK */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-          {/* Daily Work Activities (7 Cols) */}
+          {/* Daily Work Activities */}
           <div className="lg:col-span-7 bento-card p-7 sm:p-9 space-y-5 bg-white">
             <div className="flex items-center justify-between pb-3 border-b border-[#E5DDD1]">
               <div>
                 <h3 className="font-display text-2xl font-black text-[#062419]">
-                  What You Actually Do On a Typical Tuesday
+                  What You Actually Do On a Typical Day
                 </h3>
                 <span className="text-xs text-[#537566] font-medium">
-                  Verified empirical tasks recorded by the US Department of Labor
+                  Verified real-world responsibilities and workplace rhythms
                 </span>
               </div>
               <span className="text-[10px] font-black uppercase text-[#064E3B] bg-[#ECFDF5] px-3 py-1 rounded-full border border-[#047857]/30">
-                O*NET 29.0
+                Workplace Truth
               </span>
             </div>
 
@@ -233,7 +241,7 @@ function RealityCheckContent() {
             )}
           </div>
 
-          {/* Tools & Tech Stack (5 Cols) */}
+          {/* Tools & Tech Stack */}
           <div className="lg:col-span-5 bento-card p-7 sm:p-9 space-y-5 flex flex-col justify-between bg-white">
             <div className="space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#E5DDD1]">
@@ -241,11 +249,11 @@ function RealityCheckContent() {
                   Required Industry Stack
                 </h3>
                 <span className="text-[10px] font-black uppercase text-[#B38A38] bg-[#F7EEDB] px-3 py-1 rounded-full border border-[#C5A880]">
-                  Employer Reports
+                  Modern Tooling
                 </span>
               </div>
               <p className="text-xs text-[#537566] leading-relaxed">
-                Technologies most frequently cited in hiring requirements for SOC {career.onetSocCode || career.id}:
+                Technologies most frequently cited in hiring requirements:
               </p>
 
               {career.topToolsAndTech && career.topToolsAndTech.length > 0 && (
@@ -262,19 +270,15 @@ function RealityCheckContent() {
               )}
             </div>
 
-            {career.officialOnetUrl && (
-              <div className="pt-4 border-t border-[#E5DDD1]">
-                <a
-                  href={career.officialOnetUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-xs font-black text-[#064E3B] hover:underline"
-                >
-                  <span>Examine Full Profile on services.onetcenter.org</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-            )}
+            <div className="pt-4 border-t border-[#E5DDD1]">
+              <Link
+                href="/forks"
+                className="inline-flex items-center gap-2 text-xs font-black text-[#064E3B] hover:underline"
+              >
+                <span>Simulate Decision Tradeoffs for this role</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
         </div>
@@ -287,7 +291,7 @@ function RealityCheckContent() {
             <div className="flex items-center gap-2.5 text-[#991B1B]">
               <AlertTriangle className="w-5 h-5 text-[#DC2626]" />
               <h3 className="font-display text-2xl font-black text-[#062419]">
-                The Beginner Reality & Friction
+                The Early-Career Reality & Friction
               </h3>
             </div>
             <p className="text-sm text-[#244637] leading-relaxed font-medium bg-[#FFF1F2] p-5 rounded-2xl border border-[#FDA4AF]">
@@ -323,14 +327,14 @@ function RealityCheckContent() {
                       </span>
                     ))
                   ) : (
-                    <span className="italic text-[#537566]">Foundational skills ready to be forged on the stage map</span>
+                    <span className="italic text-[#537566]">Foundational skills ready to be forged on the action roadmap</span>
                   )}
                 </div>
               </div>
 
               <div>
                 <span className="text-[10px] font-black uppercase text-[#B38A38] tracking-wider block mb-2">
-                  Skills To Forge on the 15-Stage Map ({gapList.length}):
+                  Skills To Forge on the Roadmap ({gapList.length}):
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {gapList.slice(0, 5).map((s) => (
@@ -379,9 +383,9 @@ function RealityCheckContent() {
           <button
             disabled={generatingRoadmap}
             onClick={handleCommitToRoadmap}
-            className="emerald-btn-primary px-9 py-4 rounded-full text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-3 w-full sm:w-auto shadow-md"
+            className="emerald-btn-primary px-9 py-4 rounded-full text-sm font-black uppercase tracking-wider inline-flex items-center justify-center gap-3 w-full sm:w-auto shadow-md cursor-pointer"
           >
-            <span>{generatingRoadmap ? 'Generating 15-Stage Map...' : 'Commit to Horizon & Launch 15-Stage Map'}</span>
+            <span>{generatingRoadmap ? 'Generating Action Roadmap...' : 'Commit to Horizon & Launch Roadmap'}</span>
             <ArrowRight className="w-5 h-5 text-[#D4AF37]" />
           </button>
         </div>
