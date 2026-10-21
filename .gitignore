@@ -1,0 +1,43 @@
+# Build outputs
+target/
+build/
+dist/
+out/
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Next.js Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+
+# Maven Wrapper JAR
+.mvn/wrapper/maven-wrapper.jar
+
+# Environment & local configs
+.env
+.env.local
+.env.*.local
+*.log
+
+# IDE & Editor files
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.metadata/
+.settings/
+.classpath
+.project
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+# OS
+.DS_Store
+Thumbs.db

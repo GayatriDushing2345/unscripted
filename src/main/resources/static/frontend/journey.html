@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unscripted | Journey</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+</head>
+
+<body>
+
+  <!-- LAYOUT WRAPPER -->
+  <div class="layout">
+
+    <!-- LEFT NAVIGATION -->
+    <nav class="sidebar">
+      <h2 class="logo">Unscripted</h2>
+
+      <ul class="nav-list">
+        <li>Overview</li>
+        <li>Login</li>
+        <li class="active">Journey</li>
+        <li>Dashboard</li>
+        <li>Result</li>
+      </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <!-- PAGE HEADER -->
+      <header class="page-header">
+        <h1>Background Information</h1>
+        <p>
+          Provide a few details so the system can apply accurate logic.
+        </p>
+      </header>
+
+      <!-- INTERESTS -->
+      <section class="card">
+        <h2>Areas of Interest</h2>
+        <p class="soft-text">
+          Select domains you are interested in exploring.
+        </p>
+
+        <label class="option">
+          <input type="checkbox" value="Technology">
+          Technology
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Design">
+          Design
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Business">
+          Business
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Healthcare">
+          Healthcare
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Environment">
+          Environment
+        </label>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="card">
+        <h2>Current Skill Exposure</h2>
+        <p class="soft-text">
+          Select skills you already have some familiarity with.
+        </p>
+
+        <label class="option">
+          <input type="checkbox" value="Programming">
+          Programming
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Problem Solving">
+          Problem Solving
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Design Tools">
+          Design Tools
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Communication">
+          Communication
+        </label>
+
+        <label class="option">
+          <input type="checkbox" value="Data Analysis">
+          Data Analysis
+        </label>
+      </section>
+
+      <!-- EXPERIENCE LEVEL -->
+      <section class="card">
+        <h2>Experience Level</h2>
+        <p class="soft-text">
+          Select the option that best describes your current stage.
+        </p>
+
+        <label class="option">
+          <input type="radio" name="level" value="Beginner">
+          Beginner
+        </label>
+
+        <label class="option">
+          <input type="radio" name="level" value="Intermediate">
+          Intermediate
+        </label>
+
+        <label class="option">
+          <input type="radio" name="level" value="Advanced">
+          Advanced
+        </label>
+      </section>
+
+      <!-- CTA -->
+      <section class="card">
+        <button
+          class="primary-btn"
+          onclick="location.href='dashboard.html'"
+        >
+          Continue
+        </button>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

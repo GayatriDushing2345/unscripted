@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+:root {
+  /* Gen-Z & Gen-Alpha Vibrant Candy Adventure Palette */
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #F4ECFF;
+  
+  /* Punchy Game Accents */
+  --color-electric-purple: #7C3AED;
+  --color-candy-lilac: #A78BFA;
+  --color-neon-pink: #F43F5E;
+  --color-blush-rose: #FB7185;
+  --color-arcade-coral: #FB923C;
+  --color-sunshine-gold: #FBBF24;
+  --color-game-mint: #10B981;
+  --color-cyber-aqua: #06B6D4;
+  --color-deep-plum: #1E152A;
+  
+  --text-primary: #1E152A;
+  --text-muted: #64567A;
+  --text-light: #9486A8;
+
+  --border-soft: #E9D5FF;
+  --border-subtle: #F3E8FF;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Candy Game Keyframe Animations */
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(124, 58, 237, 0.4), 0 0 35px rgba(244, 63, 94, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(124, 58, 237, 0.7), 0 0 50px rgba(244, 63, 94, 0.4); }
+}
+
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkleSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.85); opacity: 0; }
+  70% { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-float {
+  animation: floatGentle 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounceSlow 2s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkleSpin 6s linear infinite;
+}
+
+.animate-pop {
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Game World Chapter Atmospheres */
+.chapter-bg-1 {
+  background: radial-gradient(circle at 10% 20%, rgba(167, 139, 250, 0.25) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(251, 113, 133, 0.25) 0%, transparent 45%),
+              #FAF7F2;
+}
+
+.chapter-bg-2 {
+  background: radial-gradient(circle at 15% 30%, rgba(251, 146, 60, 0.2) 0%, transparent 40%),
+              radial-gradient(circle at 85% 70%, rgba(251, 191, 36, 0.25) 0%, transparent 45%),
+              #FFFDF8;
+}
+
+.chapter-bg-3 {
+  background: radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.2) 0%, transparent 40%),
+              radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.25) 0%, transparent 45%),
+              #F6FFF9;
+}
+
+.chapter-bg-4 {
+  background: radial-gradient(circle at 10% 30%, rgba(124, 58, 237, 0.25) 0%, transparent 40%),
+              radial-gradient(circle at 90% 70%, rgba(244, 63, 94, 0.2) 0%, transparent 45%),
+              #FAF5FF;
+}
+
+.chapter-bg-5 {
+  background: radial-gradient(circle at 50% 20%, rgba(251, 191, 36, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 50% 80%, rgba(167, 139, 250, 0.25) 0%, transparent 50%),
+              #FFFBF0;
+}
+
+/* Big Juicy Game Buttons & Cards */
+.game-btn-primary {
+  background: linear-gradient(135deg, #7C3AED 0%, #9333EA 50%, #C026D3 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 0 #581C87, 0 12px 24px -4px rgba(124, 58, 237, 0.4);
+  transition: all 0.15s ease-in-out;
+}
+
+.game-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #581C87, 0 16px 28px -4px rgba(124, 58, 237, 0.5);
+}
+
+.game-btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #581C87, 0 6px 12px -2px rgba(124, 58, 237, 0.3);
+}
+
+.game-btn-coral {
+  background: linear-gradient(135deg, #F43F5E 0%, #FB7185 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 0 #BE123C, 0 12px 24px -4px rgba(244, 63, 94, 0.4);
+  transition: all 0.15s ease-in-out;
+}
+
+.game-btn-coral:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #BE123C, 0 16px 28px -4px rgba(244, 63, 94, 0.5);
+}
+
+.game-btn-coral:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #BE123C, 0 6px 12px -2px rgba(244, 63, 94, 0.3);
+}
+
+.game-card-3d {
+  background: #FFFFFF;
+  border: 2px solid #E9D5FF;
+  box-shadow: 0 10px 0 #F3E8FF, 0 15px 30px -5px rgba(30, 21, 42, 0.08);
+  border-radius: 1.75rem;
+}
+
+.game-badge {
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unscripted | Dashboard</title>
+
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+</head>
+
+<body>
+
+  <div class="layout">
+
+    <!-- LEFT NAVIGATION -->
+    <nav class="sidebar">
+      <h2 class="logo">Unscripted</h2>
+      <ul class="nav-list">
+        <li>Overview</li>
+        <li>Login</li>
+        <li>Journey</li>
+        <li class="active">Dashboard</li>
+        <li>Result</li>
+      </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <!-- HEADER -->
+      <header class="page-header">
+        <h1>Applying Your Information</h1>
+        <p>
+          The system is processing your inputs and mapping them
+          to relevant career paths.
+        </p>
+      </header>
+
+      <!-- INPUT SUMMARY -->
+      <section class="card">
+        <h2>Your Inputs</h2>
+        <ul id="inputSummary" class="soft-text"></ul>
+      </section>
+
+      <!-- APPLIED LOGIC -->
+      <section class="card">
+        <h2>Interpreted Career Paths</h2>
+        <div id="appliedResults"></div>
+      </section>
+
+      <!-- CTA -->
+      <section class="card">
+        <button
+          class="primary-btn"
+          onclick="location.href='final.html'"
+        >
+          Continue to Final Result
+        </button>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- JS -->
+  <script src="./js/ui.js"></script>
+
+</body>
+</html>
